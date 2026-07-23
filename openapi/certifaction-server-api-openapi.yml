@@ -1,0 +1,62 @@
+openapi: 3.1.0
+info:
+  title: '{{ .ProductName }} Admin Account Server API'
+  description: '{{ .ProductName }} Admin API is used to manage users, roles and teamspaces.
+
+
+    ## Setup requirements
+
+
+    Authentication is required to perform some operations. Please refer to the [Authentication](https://developers.certifaction.com/en/references/authentication) section to obtain an API Key or token.
+
+    '
+  version: ''
+servers:
+- url: '{{ .APIServerURL }}'
+security:
+- api_key: []
+tags:
+- name: Server
+  description: Check the server's status
+paths:
+  /health:
+    get:
+      operationId: server_health_check
+      summary: Check server health
+      responses:
+        200:
+          description: Health check response.
+          content:
+            application/json:
+              schema:
+                properties:
+                  description:
+                    type: string
+                  service_name:
+                    type: string
+                  status:
+                    type: string
+      security: []
+      tags:
+      - Server
+  /ping:
+    get:
+      summary: Check that the API server is running
+      responses:
+        200:
+          description: The server is up and running.
+          content:
+            text/plain:
+              schema:
+                type: string
+                enum:
+                - pong
+      security: []
+      tags:
+      - Server
+components:
+  securitySchemes:
+    api_key:
+      name: Authorization
+      in: header
+      type: apiKey

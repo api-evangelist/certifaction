@@ -1,0 +1,84 @@
+openapi: 3.1.0
+info:
+  title: '{{ .ProductName }} Admin Account Documents API'
+  description: '{{ .ProductName }} Admin API is used to manage users, roles and teamspaces.
+
+
+    ## Setup requirements
+
+
+    Authentication is required to perform some operations. Please refer to the [Authentication](https://developers.certifaction.com/en/references/authentication) section to obtain an API Key or token.
+
+    '
+  version: ''
+servers:
+- url: '{{ .APIServerURL }}'
+security:
+- api_key: []
+tags:
+- name: Documents
+  description: Download your documents or remove {{ .ProductName }}'s access to them
+paths:
+  /delete-access:
+    post:
+      operationId: remove_access
+      summary: Remove {{ .ProductName }}'s access to a file
+      requestBody:
+        description: The file that you want to remove {{ .ProductName }}'s access for.
+        required: true
+        content:
+          application/pdf: {}
+      responses:
+        200:
+          description: File access was removed successfully.
+        400:
+          $ref: '#/components/responses/bad_request'
+        401:
+          $ref: '#/components/responses/unauthorized'
+      tags:
+      - Documents
+  /download:
+    get:
+      summary: Download files
+      parameters:
+      - name: file
+        description: A Digital Archive URL
+        in: query
+        required: true
+        schema:
+          type: string
+          format: url
+      - name: password
+        description: The signature request password, if Privacy 2.0 was enabled
+        in: query
+        schema:
+          type: string
+      operationId: download_file
+      responses:
+        200:
+          description: File download content.
+          content:
+            application/pdf:
+              schema:
+                type: string
+            application/zip:
+              schema:
+                type: string
+        400:
+          $ref: '#/components/responses/bad_request'
+        401:
+          $ref: '#/components/responses/unauthorized'
+      security: []
+      tags:
+      - Documents
+components:
+  responses:
+    bad_request:
+      description: The request is not properly formed. For example, the content could not be read.
+    unauthorized:
+      description: You are not authorized to carry out the operation. Check that your API key is correct.
+  securitySchemes:
+    api_key:
+      name: Authorization
+      in: header
+      type: apiKey

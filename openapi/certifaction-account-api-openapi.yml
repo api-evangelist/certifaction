@@ -1,0 +1,192 @@
+openapi: 3.1.0
+info:
+  title: '{{ .ProductName }} Admin Account API'
+  description: '{{ .ProductName }} Admin API is used to manage users, roles and teamspaces.
+
+
+    ## Setup requirements
+
+
+    Authentication is required to perform some operations. Please refer to the [Authentication](https://developers.certifaction.com/en/references/authentication) section to obtain an API Key or token.
+
+    '
+  version: ''
+servers:
+- url: '{{ .APIServerURL }}'
+security:
+- api_key: []
+tags:
+- name: Account
+  description: Access your user account data
+paths:
+  /qes/check:
+    post:
+      summary: Check account QES status
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                jurisdiction:
+                  type: string
+              required:
+              - jurisdiction
+      responses:
+        200:
+          description: QES is enabled for your account.
+        400:
+          $ref: '#/components/responses/bad_request'
+        401:
+          $ref: '#/components/responses/unauthorized'
+        404:
+          description: QES is disabled for your account.
+      tags:
+      - Account
+  /user:
+    get:
+      operationId: get_user
+      summary: Get account data
+      responses:
+        200:
+          description: The user data for your account.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'
+        401:
+          $ref: '#/components/responses/unauthorized'
+      tags:
+      - Account
+components:
+  responses:
+    bad_request:
+      description: The request is not properly formed. For example, the content could not be read.
+    unauthorized:
+      description: You are not authorized to carry out the operation. Check that your API key is correct.
+  schemas:
+    identity:
+      properties:
+        uid:
+          type: string
+        user_uid:
+          type: string
+        issuer:
+          type: string
+        status:
+          type: string
+        verification_url:
+          type: string
+        verification_id:
+          type: string
+        evidence_url:
+          type: string
+        proof:
+          type: string
+        name:
+          type: string
+        given_name:
+          type: string
+        family_name:
+          type: string
+        birthday:
+          type: string
+        signature_level:
+          type: string
+        signature_jurisdiction:
+          type: string
+      required:
+      - uid
+      - user_uid
+      - issuer
+      - status
+      - verification_url
+      - verification_id
+      - evidence_url
+      - proof
+      - name
+      - given_name
+      - family_name
+      - birthday
+    user:
+      properties:
+        id:
+          type: integer
+        uid:
+          type: string
+        external_id:
+          type: string
+        email:
+          type: string
+        title:
+          type: string
+        name:
+          type: string
+        first_name:
+          type: string
+        middle_names:
+          type: string
+        last_name:
+          type: string
+        affiliation:
+          type: string
+        address:
+          type: string
+        postalcode:
+          type: string
+        location:
+          type: string
+        eth_address:
+          type: string
+        quota:
+          type: integer
+        disabled:
+          type: boolean
+        file_suffix:
+          type: string
+        permissions:
+          type: array
+          items:
+            type: string
+        subscription_type:
+          type: string
+        encrypt_claims:
+          type: boolean
+        verified_by:
+          type: string
+        features:
+          type: object
+        organizations:
+          type: array
+          items:
+            $ref: '#/components/schemas/organization'
+        identities:
+          type: array
+          items:
+            $ref: '#/components/schemas/identity'
+        theme:
+          properties:
+            name:
+              type: string
+          required:
+          - name
+        name_verified:
+          type: boolean
+    organization:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          maxLength: 80
+          minLength: 2
+        subscription_type:
+          type: string
+        quota:
+          type: integer
+      required:
+      - id
+  securitySchemes:
+    api_key:
+      name: Authorization
+      in: header
+      type: apiKey

@@ -1,0 +1,174 @@
+openapi: 3.1.0
+info:
+  title: '{{ .ProductName }} Admin Account Teamspace API'
+  description: '{{ .ProductName }} Admin API is used to manage users, roles and teamspaces.
+
+
+    ## Setup requirements
+
+
+    Authentication is required to perform some operations. Please refer to the [Authentication](https://developers.certifaction.com/en/references/authentication) section to obtain an API Key or token.
+
+    '
+  version: ''
+servers:
+- url: '{{ .APIServerURL }}'
+security:
+- api_key: []
+tags:
+- name: Teamspace
+  description: Manage teamspaces and their members.
+paths:
+  /team-space/{id}/rename:
+    patch:
+      tags:
+      - Teamspace
+      summary: Rename a teamspace
+      description: Update the name of a teamspace.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: ID of the teamspace to rename
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/teamspace_rename_request'
+      responses:
+        '201':
+          description: Teamspace renamed successfully
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '404':
+          $ref: '#/components/responses/not_found'
+        '500':
+          $ref: '#/components/responses/internal_server_error'
+  /team-space/{id}/members:
+    post:
+      tags:
+      - Teamspace
+      summary: Add members to a teamspace
+      description: Add one or more users to a teamspace by user ID or email.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: ID of the teamspace
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/teamspace_member_add_request'
+      responses:
+        '201':
+          description: Members added successfully
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '404':
+          $ref: '#/components/responses/not_found'
+        '500':
+          $ref: '#/components/responses/internal_server_error'
+  /team-space/{id}/members/{memberId}:
+    delete:
+      tags:
+      - Teamspace
+      summary: Remove a member from a teamspace
+      description: Remove a specific user from a teamspace.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: ID of the teamspace
+      - name: memberId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: ID of the member to remove
+      - name: send_email
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: true
+        description: Whether to send a notification email. Default is true.
+      responses:
+        '204':
+          description: Member removed successfully
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '404':
+          $ref: '#/components/responses/not_found'
+        '500':
+          $ref: '#/components/responses/internal_server_error'
+components:
+  responses:
+    bad_request:
+      description: The request is not properly formed. For example, the content could not be read.
+    internal_server_error:
+      description: An error occurred on the server
+    not_found:
+      description: The requested resource was not found.
+    forbidden:
+      description: You do not have permission to carry out the operation. For example you might not have the required role.
+    unauthorized:
+      description: You are not authorized to carry out the operation. Check that your API key is correct.
+  schemas:
+    teamspace_member_add_request:
+      type: object
+      properties:
+        member_user_ids:
+          type: array
+          items:
+            type: string
+          description: List of user IDs to add to the teamspace. Can only be used if the user joined already.
+        member_user_emails:
+          type: array
+          items:
+            type: string
+          description: List of user emails to invite to the teamspace. Needs to be used if the user did not join yet.
+        send_email:
+          type: boolean
+          description: Whether to send an email invitation. Default is true if not specified.
+      not:
+        allOf:
+        - properties:
+            member_user_ids:
+              maxItems: 0
+        - properties:
+            member_user_emails:
+              maxItems: 0
+    teamspace_rename_request:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The new name for the teamspace
+      required:
+      - name
+  securitySchemes:
+    api_key:
+      name: Authorization
+      in: header
+      type: apiKey
