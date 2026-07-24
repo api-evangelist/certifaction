@@ -1,0 +1,45 @@
+generated: '2026-07-18'
+method: searched
+source: https://certifaction.com/security-esigning-and-data/, openapi/certifaction-local-api-openapi.yml
+standards:
+  - id: eidas
+    conforms: true
+    evidence: "Provides eIDAS-compliant electronic signatures (SES/AES/QES); documented on the security page."
+  - id: zertes
+    conforms: true
+    evidence: "Swiss ZertES-compliant qualified electronic signatures."
+  - id: pades
+    conforms: true
+    evidence: "PAdES digital PDF signatures with embedded PKCS#7/CMS signature; core of the Local API."
+  - id: gdpr
+    conforms: true
+    evidence: "GDPR and Swiss revFADP compliant; Zero Document Knowledge / EU + Switzerland data residency."
+  - id: ueta-esign
+    conforms: true
+    evidence: "Supports US UETA and ESIGN electronic-signature standards."
+  - id: iso-27001
+    conforms: true
+    evidence: "ISO/IEC 27001:2022 certified information security management system (TÜV SÜD)."
+  - id: oidc
+    conforms: true
+    evidence: "Access tokens can be issued by an external OIDC provider registered with Certifaction (authentication reference)."
+  - id: apikey-auth
+    conforms: true
+    evidence: "api_key securityScheme (Authorization header) declared in OpenAPI for server-side integration."
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: "Error responses use plain HTTP status codes (400/401/403/404/409/500) without application/problem+json bodies."
+  - id: rfc8594-sunset
+    conforms: false
+    evidence: "No documented Deprecation/Sunset header support."
+compliance_program:
+  published: true
+  certifications:
+    - ISO/IEC 27001:2022
+    - eIDAS
+    - ZertES
+    - GDPR
+    - revFADP
+    - UETA
+    - ESIGN
+  url: https://certifaction.com/security-esigning-and-data/

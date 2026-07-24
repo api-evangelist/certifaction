@@ -1,0 +1,40 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/certifaction-local-api-openapi.yml, openapi/certifaction-admin-api-openapi.yml
+format: http-status
+notes: >-
+  Certifaction's Local and Admin APIs signal errors with plain HTTP status codes
+  and a human-readable description; they do not use application/problem+json
+  (RFC 9457). Titles and remediation below are taken verbatim from the OpenAPI
+  response definitions.
+problems:
+  - status: 400
+    key: bad_request
+    title: Bad request
+    detail: "The request is not properly formed. For example, the content could not be read."
+    remediation: Check the request body and parameters.
+  - status: 401
+    key: unauthorized
+    title: Unauthorized
+    detail: "You are not authorized to carry out the operation. Check that your API key is correct."
+    remediation: Verify the Authorization header carries a valid API key or access token.
+  - status: 403
+    key: forbidden
+    title: Forbidden
+    detail: "You do not have permission to carry out the operation. For example you might not have the required role."
+    remediation: Confirm the account/role has permission for the operation.
+  - status: 404
+    key: not_found
+    title: Not found
+    detail: "The requested resource was not found."
+    remediation: Verify the resource identifier (file hash, request id).
+  - status: 409
+    key: conflict
+    title: Conflict
+    detail: "Conflict detected in the request. For example, a user might have already been joined an organization."
+    remediation: Reconcile with current state before retrying.
+  - status: 500
+    key: internal_server_error
+    title: Internal server error
+    detail: "An error occurred on the server."
+    remediation: Retry later; contact support if it persists.

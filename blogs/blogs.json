@@ -1,0 +1,14 @@
+{
+  "repo": "certifaction",
+  "feeds": [
+    {
+      "source": "https://developers.certifaction.com/en/guides/getting-started-api",
+      "feed_url": "https://developers.certifaction.com/en/guides/getting-started-api",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-07-20T13:31:34Z"
+}

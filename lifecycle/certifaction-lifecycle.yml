@@ -1,0 +1,20 @@
+generated: '2026-07-18'
+method: searched
+source: https://github.com/certifaction/cli/releases, https://developers.certifaction.com/en/references/api
+versioning:
+  scheme: semver
+  current: v1.9.4
+  applies_to: certifaction CLI / Local API distribution
+  docs: https://github.com/certifaction/cli/releases
+deprecation:
+  policy_url: null
+  sunset_header: false
+  notes: No published deprecation policy or RFC 8594 Sunset/Deprecation header support found.
+sla:
+  url: null
+status_page: null
+deprecated_operations: []
+notes: >-
+  Certifaction distributes the CLI/Local API as versioned GitHub releases (semver).
+  No public status page, uptime SLA, or formal deprecation policy was found at the
+  time of enrichment.

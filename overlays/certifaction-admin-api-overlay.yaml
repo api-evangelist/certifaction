@@ -1,0 +1,15 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Certifaction Admin API
+  version: 1.0.0
+extends: openapi/certifaction-admin-api-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-enriched: '2026-07-18'
+      x-product-name: Certifaction
+      x-scope: Organization, user, role, and team-space administration.
+      x-auth: authentication/certifaction-authentication.yml
+  - target: $.servers
+    update:
+      x-production-api-host: https://api.certifaction.io

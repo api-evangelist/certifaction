@@ -1,0 +1,49 @@
+generated: '2026-07-18'
+method: searched
+source: >-
+  https://developers.certifaction.com/en/references/authentication,
+  https://developers.certifaction.com/en/guides/webhooks,
+  openapi/certifaction-local-api-openapi.yml
+authentication:
+  style: api-key-or-token
+  transport: "Authorization header carries the API key (server-side) or an OIDC access token"
+  detail: authentication/certifaction-authentication.yml
+  notes: >-
+    API keys are managed in the Certifaction web app and are for server-side
+    integration; access tokens may be issued by the customer or a registered
+    external OIDC provider.
+idempotency:
+  supported: false
+  notes: >-
+    No documented idempotency-key contract. /request/create accepts an optional
+    client-supplied `transaction-id` used for correlation/callback matching, not
+    for server-side request de-duplication.
+pagination:
+  supported: false
+  notes: "No collection pagination; list endpoints return the full set for a file. (The `page` parameter is the PDF page for signature placement, not pagination.)"
+request_tracing:
+  correlation_id: transaction-id
+  scope: /request/create
+  notes: Optional client-supplied identifier echoed through the signature-request lifecycle and webhook callback.
+error_envelope:
+  format: http-status
+  problem_json: false
+  detail: errors/certifaction-problem-types.yml
+  notes: Plain HTTP status codes with a human-readable description; not RFC 9457.
+webhooks:
+  style: per-request-callback
+  registration: "webhook-url parameter on /request/create (URL-encoded)"
+  delivery: "POST with empty body on signature-request completion"
+  authentication: "Optional account-level secret sent as `authorization: Bearer <secret>`"
+  detail: asyncapi/certifaction-webhooks.yml
+versioning:
+  scheme: semver
+  detail: lifecycle/certifaction-lifecycle.yml
+rate_limiting:
+  documented: false
+  notes: No rate-limit headers or published quotas found.
+local_processing:
+  notes: >-
+    Documents are hashed and E2E-encrypted client-side by the CLI/Local API; only
+    the hash is transmitted to the Certifaction API for signature (Zero Document
+    Knowledge).

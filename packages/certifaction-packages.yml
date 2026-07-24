@@ -1,0 +1,44 @@
+generated: '2026-07-18'
+method: searched
+source: https://www.npmjs.com/org/certifaction, https://github.com/certifaction/cli/releases
+packages:
+  - language: javascript
+    registry: npm
+    name: "@certifaction/verification-core"
+    version: 3.7.1
+    url: https://www.npmjs.com/package/@certifaction/verification-core
+    install: npm install @certifaction/verification-core
+    description: Client that verifies a document hash against the Certifaction Ethereum smart contract.
+    official: true
+  - language: javascript
+    registry: npm
+    name: "@certifaction/verification-vue-component"
+    version: 3.7.1
+    url: https://www.npmjs.com/package/@certifaction/verification-vue-component
+    install: npm install @certifaction/verification-vue-component
+    description: Vue component for Certifaction document verification.
+    official: true
+  - language: javascript
+    registry: npm
+    name: "@certifaction/vue-pdf-viewer"
+    version: 1.7.2
+    url: https://www.npmjs.com/package/@certifaction/vue-pdf-viewer
+    install: npm install @certifaction/vue-pdf-viewer
+    description: PDF viewer for Vue.js based on Mozilla's PDF.js.
+    official: true
+  - language: javascript
+    registry: npm
+    name: "@certifaction/pdfjs"
+    version: 1.7.2
+    url: https://www.npmjs.com/package/@certifaction/pdfjs
+    install: npm install @certifaction/pdfjs
+    description: Mozilla's PDF.js packaged as an ES6 module.
+    official: true
+  - language: binary
+    registry: github-releases
+    name: certifaction-cli
+    version: v1.9.4
+    url: https://github.com/certifaction/cli/releases
+    install: "Download certifaction-cli_<version>_<os>_<arch> (deb/rpm/tar.gz for linux, darwin, windows, freebsd)"
+    description: Certifaction CLI to sign, request, verify, and revoke documents; also runs the Local API in server mode.
+    official: true

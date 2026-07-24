@@ -1,0 +1,15 @@
+generated: '2026-07-18'
+method: generated
+skills:
+  - file: certifaction-sign-document.md
+    name: Sign a document with Certifaction
+    api: openapi/certifaction-local-api-openapi.yml
+    operations: [prepare_file, sign_file, get_user]
+  - file: certifaction-request-signature.md
+    name: Request signatures and track them with Certifaction
+    api: openapi/certifaction-local-api-openapi.yml
+    operations: [request_signature, request_status, file_requests_status, list_requests, cancel_request, cancel_request_all]
+  - file: certifaction-verify-download.md
+    name: Verify and retrieve a signed document with Certifaction
+    api: openapi/certifaction-local-api-openapi.yml
+    operations: [download_file, remove_access, get_user]

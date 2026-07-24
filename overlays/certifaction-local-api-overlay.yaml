@@ -1,0 +1,19 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Certifaction Local API
+  version: 1.0.0
+extends: openapi/certifaction-local-api-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-enriched: '2026-07-18'
+      x-product-name: Certifaction
+      x-privacy-model: Zero Document Knowledge (client-side hashing + E2E encryption)
+      x-auth: authentication/certifaction-authentication.yml
+      x-conventions: conventions/certifaction-conventions.yml
+      x-errors: errors/certifaction-problem-types.yml
+      x-webhooks: asyncapi/certifaction-webhooks.yml
+  - target: $.servers
+    update:
+      x-production-api-host: https://api.certifaction.io
+      x-note: The Local API runs as a client-hosted proxy (default localhost:8081) that talks to the Certifaction platform API.

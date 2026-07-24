@@ -1,0 +1,55 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/certifaction-local-api-openapi.yml
+notes: >-
+  Entity-relationship graph derived from OpenAPI component schema $ref links in
+  the Certifaction Local API. Verification entities model the result of verifying
+  a signed document; account entities model users, organizations, and identities.
+entities:
+  - name: user
+    description: Authenticated account holder.
+  - name: organization
+    description: Organization a user belongs to.
+  - name: identity
+    description: A verified identity attached to a user.
+  - name: verification_result
+    description: Result of verifying a document.
+  - name: verification_file_info
+    description: File metadata within a verification result.
+  - name: verification_event
+    description: A signature/registration event on a verified document.
+  - name: verification_issuer
+    description: Issuer of a verification event.
+  - name: verification_signature
+    description: Signature detail within a verification event.
+  - name: verified_by
+    description: Party that performed the verification/attestation.
+relationships:
+  - from: user
+    to: organization
+    kind: has_many
+    via: organizations
+  - from: user
+    to: identity
+    kind: has_many
+    via: identities
+  - from: verification_result
+    to: verification_file_info
+    kind: has_one
+    via: file
+  - from: verification_result
+    to: verification_event
+    kind: has_many
+    via: events
+  - from: verification_event
+    to: verification_issuer
+    kind: has_one
+    via: issuer
+  - from: verification_event
+    to: verification_signature
+    kind: has_one
+    via: signature
+  - from: verification_issuer
+    to: verified_by
+    kind: has_one
+    via: verified_by

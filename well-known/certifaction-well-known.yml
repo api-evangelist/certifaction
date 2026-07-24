@@ -1,0 +1,25 @@
+generated: '2026-07-18'
+method: probed
+source: live probes of Certifaction hosts
+notes: >-
+  No real /.well-known/ discovery documents were served. The API host
+  (api.certifaction.io) returns 404 for all probed paths; the app and developer
+  portal hosts return their SPA HTML shell (HTTP 200) for any path, so no genuine
+  document is present. Recorded for auditability; no WellKnown pointer wired.
+hosts:
+  - host: https://api.certifaction.io
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+      - {path: /.well-known/api-catalog, status: 404}
+  - host: https://app.certifaction.io
+    documents:
+      - {path: /.well-known/security.txt, status: 200, real: false, note: SPA HTML shell}
+      - {path: /.well-known/openid-configuration, status: 200, real: false, note: SPA HTML shell}
+      - {path: /.well-known/oauth-authorization-server, status: 200, real: false, note: SPA HTML shell}
+      - {path: /.well-known/api-catalog, status: 200, real: false, note: SPA HTML shell}
+  - host: https://certifaction.com
+    documents:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}

@@ -1,0 +1,28 @@
+generated: '2026-07-18'
+method: searched
+source: https://www.npmjs.com/org/certifaction, https://github.com/certifaction/verification
+summary: >-
+  Client-side, embeddable UI components for rendering and verifying Certifaction
+  signed documents in the browser. Distinct from the server-side integration
+  surface (CLI / Local API); these are front-end building blocks.
+families:
+  - name: Verification
+    description: Verify a document hash against the Certifaction Ethereum smart contract and render the verification result.
+    components:
+      - name: "@certifaction/verification-vue-component"
+        kind: vue-component
+        url: https://www.npmjs.com/package/@certifaction/verification-vue-component
+        loader: "@certifaction/verification-core"
+      - name: "@certifaction/verification-core"
+        kind: js-client
+        url: https://www.npmjs.com/package/@certifaction/verification-core
+  - name: Document viewer
+    description: Render PDF documents in the browser for signing and verification workflows.
+    components:
+      - name: "@certifaction/vue-pdf-viewer"
+        kind: vue-component
+        url: https://www.npmjs.com/package/@certifaction/vue-pdf-viewer
+        loader: "@certifaction/pdfjs"
+      - name: "@certifaction/pdfjs"
+        kind: js-library
+        url: https://www.npmjs.com/package/@certifaction/pdfjs

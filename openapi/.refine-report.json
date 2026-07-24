@@ -1,0 +1,31 @@
+{
+  "provider": "certifaction",
+  "sources": [
+    "certifaction-account-api-openapi.yml",
+    "certifaction-documents-api-openapi.yml",
+    "certifaction-organization-api-openapi.yml",
+    "certifaction-server-api-openapi.yml",
+    "certifaction-signing-api-openapi.yml",
+    "certifaction-teamspace-api-openapi.yml"
+  ],
+  "outputs": [
+    "certifaction-account-api-openapi.yml",
+    "certifaction-documents-api-openapi.yml",
+    "certifaction-organization-api-openapi.yml",
+    "certifaction-server-api-openapi.yml",
+    "certifaction-signing-api-openapi.yml",
+    "certifaction-teamspace-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [
+    "certifaction-account-api-openapi.yml: info.version missing",
+    "certifaction-documents-api-openapi.yml: info.version missing",
+    "certifaction-organization-api-openapi.yml: info.version missing",
+    "certifaction-server-api-openapi.yml: info.version missing",
+    "certifaction-signing-api-openapi.yml: info.version missing",
+    "certifaction-teamspace-api-openapi.yml: info.version missing"
+  ],
+  "notes": [],
+  "skipped": []
+}

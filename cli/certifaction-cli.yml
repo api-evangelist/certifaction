@@ -1,0 +1,71 @@
+generated: '2026-07-18'
+method: searched
+source: https://developers.certifaction.com/en/references/cli, https://github.com/certifaction/cli
+name: Certifaction CLI
+binary: certifaction
+repo: https://github.com/certifaction/cli
+docs: https://developers.certifaction.com/en/references/cli
+summary: >-
+  Command-line tool that sits between a client application and the Certifaction
+  API to sign, request, verify, and revoke documents without leaking document
+  content outside the client's infrastructure. Runs interactively or in server
+  mode, where it exposes the Local API as local HTTP endpoints.
+install:
+  - method: deb
+    command: "dpkg -i certifaction-cli_1.9.4_linux_amd64.deb"
+  - method: rpm
+    command: "rpm -i certifaction-cli_1.9.4_linux_amd64.rpm"
+  - method: tarball
+    command: "download and extract certifaction-cli_1.9.4_<os>_<arch>.tar.gz from GitHub releases"
+    platforms: [linux, darwin, windows, freebsd]
+global_flags:
+  - flag: "--api"
+    description: Overrides the default Certifaction API URL.
+  - flag: "--api-key"
+    description: The API key used for authentication.
+  - flag: "--env"
+    description: Optional environment name; defaults to prod and auto-configures the API URL.
+  - flag: "-t, --token"
+    description: The authentication (OIDC access) token.
+  - flag: "-v, --verbose"
+    description: Increase log verbosity; repeatable.
+commands:
+  - name: sign
+    description: Sign a document.
+  - name: prepare
+    description: Prepare a document for signing.
+  - name: request
+    description: Request a document signature from others.
+  - name: retract
+    description: Retract a document.
+  - name: revoke
+    description: Revoke a document.
+  - name: register
+    description: Register a document.
+  - name: verify
+    description: Verify a document.
+  - name: qes
+    description: Qualified Electronic Signature (QES) operations.
+  - name: download
+    description: Download and decrypt a document from the digital archive.
+  - name: delete-access
+    description: Remove Certifaction access to a file.
+  - name: export
+    description: Export data.
+  - name: generate-keys
+    description: Generate encryption keys and an optional password.
+  - name: info
+    description: Return the metadata of a provided file.
+  - name: user
+    description: Return the authenticated user information.
+  - name: health
+    description: Return the health of the Certifaction API.
+  - name: ping
+    description: Ping the Certifaction API.
+  - name: server
+    description: Start in server mode, exposing the Local API over local HTTP.
+key_flows:
+  - name: Local API server
+    description: "certifaction server exposes the signing/verification API on localhost (default port 8081) so applications integrate over HTTP while documents stay local."
+  - name: Local processing
+    description: "Documents are hashed and E2E-encrypted client-side; only the hash is sent to the Certifaction API for signature."

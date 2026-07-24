@@ -1,0 +1,25 @@
+generated: '2026-07-18'
+method: searched
+source: https://developers.certifaction.com/en/guides/webhooks
+spec_type: Webhooks
+summary: >-
+  Certifaction supports a per-request webhook callback. When creating a signature
+  request via POST /request/create, the initiator supplies a `webhook-url` that
+  Certifaction calls back on completion of the signature request.
+webhooks:
+  - name: signature-request-completed
+    trigger: Completion of a signature request created via /request/create
+    registration:
+      mechanism: per-request
+      parameter: webhook-url
+      encoding: url-encoded
+      notes: Initiators may include dynamic query parameters to uniquely identify the request.
+    delivery:
+      method: POST
+      body: empty
+    authentication:
+      optional: true
+      mechanism: shared-secret
+      header: "authorization: Bearer <secret>"
+      notes: An account-level secret can be set on request so the initiator can verify the callback originated from Certifaction.
+    source_operation: openapi/certifaction-local-api-openapi.yml#request_signature

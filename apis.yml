@@ -1,8 +1,14 @@
 aid: certifaction
 name: Certifaction
-description: 'Certifaction is a company surfaced as a portfolio company of hv-capital, seedcamp and added
-  to the API Evangelist network as a stub for enrichment. Sector: ai-enterprise-software. This profile
-  is a lead awaiting the enrichment pipeline.'
+description: >-
+  Certifaction is a privacy-first digital signature platform built around a Zero
+  Document Knowledge model: documents are hashed and end-to-end encrypted on the
+  client so they can be signed and verified without Certifaction ever seeing their
+  content. It offers Simple, Advanced, and Qualified Electronic Signatures
+  (SES/AES/QES) compliant with eIDAS, ZertES, UETA and ESIGN, delivered through a
+  client-hosted CLI and Local API plus an Admin API for organization, user, role
+  and team-space management, with EU / Switzerland / on-premises data residency
+  and ISO/IEC 27001:2022 certification.
 url: https://raw.githubusercontent.com/api-evangelist/certifaction/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -11,13 +17,95 @@ x-backed-by:
 - seedcamp
 x-tier: stub
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-18'
+image: https://developers.certifaction.com/themes/certifaction/logo.svg
 tags:
 - Company
 - Ai Enterprise Software
-apis: []
+- Electronic Signature
+- Digital Signature
+- Document Signing
+- Qualified Electronic Signature
+- eIDAS
+- Privacy
+- Compliance
+- Identity Verification
+- Switzerland
+apis:
+- aid: certifaction:certifaction-account-api
+  name: Certifaction Account API
+  description: Access your user account data
+  humanURL: https://developers.certifaction.com/en/references/api
+  baseURL: https://api.certifaction.io
+  tags:
+  - Account
+  properties:
+  - type: OpenAPI
+    url: openapi/certifaction-account-api-openapi.yml
+- aid: certifaction:certifaction-documents-api
+  name: Certifaction Documents API
+  description: Download your documents or remove {{ .ProductName }}'s access to them
+  humanURL: https://developers.certifaction.com/en/references/api
+  baseURL: https://api.certifaction.io
+  tags:
+  - Documents
+  properties:
+  - type: OpenAPI
+    url: openapi/certifaction-documents-api-openapi.yml
+- aid: certifaction:certifaction-organization-api
+  name: Certifaction Organization API
+  description: Manage your organization, users, and roles.
+  humanURL: https://developers.certifaction.com/en/references/api
+  baseURL: https://api.certifaction.io
+  tags:
+  - Organization
+  properties:
+  - type: OpenAPI
+    url: openapi/certifaction-organization-api-openapi.yml
+- aid: certifaction:certifaction-server-api
+  name: Certifaction Server API
+  description: Check the server's status
+  humanURL: https://developers.certifaction.com/en/references/api
+  baseURL: https://api.certifaction.io
+  tags:
+  - Server
+  properties:
+  - type: OpenAPI
+    url: openapi/certifaction-server-api-openapi.yml
+- aid: certifaction:certifaction-signing-api
+  name: Certifaction Signing API
+  description: Sign files and request signatures
+  humanURL: https://developers.certifaction.com/en/references/api
+  baseURL: https://api.certifaction.io
+  tags:
+  - Signing
+  properties:
+  - type: OpenAPI
+    url: openapi/certifaction-signing-api-openapi.yml
+- aid: certifaction:certifaction-teamspace-api
+  name: Certifaction Teamspace API
+  description: Manage teamspaces and their members.
+  humanURL: https://developers.certifaction.com/en/references/api
+  baseURL: https://api.certifaction.io
+  tags:
+  - Teamspace
+  properties:
+  - type: OpenAPI
+    url: openapi/certifaction-teamspace-api-openapi.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -25,4 +113,71 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: http://certifaction.com
+  url: https://certifaction.com
+- type: DeveloperPortal
+  url: https://developers.certifaction.com/en/
+- type: Documentation
+  url: https://developers.certifaction.com/en/guides/about
+- type: APIReference
+  url: https://developers.certifaction.com/en/references/api
+- type: GettingStarted
+  url: https://developers.certifaction.com/en/guides/getting-started-api
+- type: Blog
+  url: https://certifaction.com/content-hub/
+- type: GitHubOrganization
+  url: https://github.com/certifaction
+- type: Pricing
+  url: https://certifaction.com/pricing/
+- type: SignUp
+  url: https://app.certifaction.io/signup/
+- type: Login
+  url: https://app.certifaction.io/login
+- type: TermsOfService
+  url: https://certifaction.com/terms-and-conditions/
+- type: PrivacyPolicy
+  url: https://certifaction.com/privacy-policy/
+- type: Authentication
+  url: authentication/certifaction-authentication.yml
+- type: OpenAPI
+  url: openapi/certifaction-local-api-openapi.yml
+- type: Packages
+  url: packages/certifaction-packages.yml
+- type: SDKs
+  url: packages/certifaction-packages.yml
+- type: CLI
+  url: cli/certifaction-cli.yml
+- type: Components
+  url: components/certifaction-components.yml
+- type: MCPServer
+  url: mcp/certifaction-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/certifaction-llms.txt
+- type: Webhooks
+  url: asyncapi/certifaction-webhooks.yml
+- type: Conventions
+  url: conventions/certifaction-conventions.yml
+- type: ErrorCatalog
+  url: errors/certifaction-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/certifaction-lifecycle.yml
+- type: ChangeLog
+  url: changelog/certifaction-changelog.yml
+- type: DataModel
+  url: data-model/certifaction-data-model.yml
+- type: Conformance
+  url: conformance/certifaction-conformance.yml
+- type: Compliance
+  url: https://certifaction.com/security-esigning-and-data/
+- type: TrustCenter
+  url: security/certifaction-trust-center.yml
+- type: DomainSecurity
+  url: security/certifaction-domain-security.yml
+- type: AgenticAccess
+  url: agentic-access/certifaction-agentic-access.yml
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

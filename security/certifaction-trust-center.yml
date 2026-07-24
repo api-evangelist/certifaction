@@ -1,0 +1,23 @@
+generated: '2026-07-18'
+method: searched
+source: https://certifaction.com/security-esigning-and-data/
+url: https://certifaction.com/security-esigning-and-data/
+certifications:
+  - ISO/IEC 27001:2022
+  - eIDAS
+  - ZertES
+  - GDPR
+  - revFADP
+  - UETA
+  - ESIGN
+highlights:
+  - Zero Document Knowledge — documents are processed locally and end-to-end encrypted; Certifaction never sees content.
+  - Data residency in the EU, Switzerland, or on-premises.
+  - Hosted on ISO 27001 certified data centres (Azure Switzerland North).
+evidence:
+  - source: https://certifaction.com/security-esigning-and-data/
+    keywords: [iso 27001, eidas, zertes, gdpr, zero document knowledge, data residency]
+notes: >-
+  Certifaction publishes its security posture and named certifications on its
+  security page. No dedicated trust.<domain> portal, bug-bounty, or published
+  responsible-disclosure policy was found.
