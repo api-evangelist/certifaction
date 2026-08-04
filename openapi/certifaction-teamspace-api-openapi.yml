@@ -10,7 +10,7 @@ info:
     Authentication is required to perform some operations. Please refer to the [Authentication](https://developers.certifaction.com/en/references/authentication) section to obtain an API Key or token.
 
     '
-  version: ''
+  version: "1.0"
 servers:
 - url: '{{ .APIServerURL }}'
 security:
