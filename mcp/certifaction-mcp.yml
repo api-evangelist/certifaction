@@ -2,48 +2,52 @@ generated: '2026-07-18'
 method: derived
 status: candidate
 source: openapi/certifaction-local-api-openapi.yml
-notes: >-
-  No official Certifaction MCP server was found. This is a candidate tool list
-  derived one-to-one from the Local API operationIds so an MCP server could be
-  generated. Because the Local API runs on the client's own host (localhost),
-  a Certifaction MCP server would front the locally-running CLI/Local API.
+notes: No official Certifaction MCP server was found. This is a candidate tool list derived one-to-one
+  from the Local API operationIds so an MCP server could be generated. Because the Local API runs on the
+  client's own host (localhost), a Certifaction MCP server would front the locally-running CLI/Local API.
 server:
   name: certifaction
   transport: stdio
 tools:
-  - name: sign_file
-    description: Sign a file.
-    source_operation: openapi/certifaction-local-api-openapi.yml#sign_file
-  - name: prepare_file
-    description: Prepare a file for signing.
-    source_operation: openapi/certifaction-local-api-openapi.yml#prepare_file
-  - name: request_signature
-    description: Request a signature from others.
-    source_operation: openapi/certifaction-local-api-openapi.yml#request_signature
-  - name: cancel_request
-    description: Cancel a signature request for a signer.
-    source_operation: openapi/certifaction-local-api-openapi.yml#cancel_request
-  - name: cancel_request_all
-    description: Cancel all signature requests for a file.
-    source_operation: openapi/certifaction-local-api-openapi.yml#cancel_request_all
-  - name: list_requests
-    description: List signature requests for a file.
-    source_operation: openapi/certifaction-local-api-openapi.yml#list_requests
-  - name: request_status
-    description: Show the status of a signature request.
-    source_operation: openapi/certifaction-local-api-openapi.yml#request_status
-  - name: file_requests_status
-    description: Show status of all signature requests for a file.
-    source_operation: openapi/certifaction-local-api-openapi.yml#file_requests_status
-  - name: download_file
-    description: Download and decrypt a document.
-    source_operation: openapi/certifaction-local-api-openapi.yml#download_file
-  - name: remove_access
-    description: Remove Certifaction access to a file.
-    source_operation: openapi/certifaction-local-api-openapi.yml#remove_access
-  - name: get_user
-    description: Get account data for the authenticated user.
-    source_operation: openapi/certifaction-local-api-openapi.yml#get_user
-  - name: server_health_check
-    description: Check server health.
-    source_operation: openapi/certifaction-local-api-openapi.yml#server_health_check
+- name: sign_file
+  description: Sign a file.
+  source_operation: openapi/certifaction-local-api-openapi.yml#sign_file
+- name: prepare_file
+  description: Prepare a file for signing.
+  source_operation: openapi/certifaction-local-api-openapi.yml#prepare_file
+- name: request_signature
+  description: Request a signature from others.
+  source_operation: openapi/certifaction-local-api-openapi.yml#request_signature
+- name: cancel_request
+  description: Cancel a signature request for a signer.
+  source_operation: openapi/certifaction-local-api-openapi.yml#cancel_request
+- name: cancel_request_all
+  description: Cancel all signature requests for a file.
+  source_operation: openapi/certifaction-local-api-openapi.yml#cancel_request_all
+- name: list_requests
+  description: List signature requests for a file.
+  source_operation: openapi/certifaction-local-api-openapi.yml#list_requests
+- name: request_status
+  description: Show the status of a signature request.
+  source_operation: openapi/certifaction-local-api-openapi.yml#request_status
+- name: file_requests_status
+  description: Show status of all signature requests for a file.
+  source_operation: openapi/certifaction-local-api-openapi.yml#file_requests_status
+- name: download_file
+  description: Download and decrypt a document.
+  source_operation: openapi/certifaction-local-api-openapi.yml#download_file
+- name: remove_access
+  description: Remove Certifaction access to a file.
+  source_operation: openapi/certifaction-local-api-openapi.yml#remove_access
+- name: get_user
+  description: Get account data for the authenticated user.
+  source_operation: openapi/certifaction-local-api-openapi.yml#get_user
+- name: server_health_check
+  description: Check server health.
+  source_operation: openapi/certifaction-local-api-openapi.yml#server_health_check
+deployment:
+  mode: none
+  verified: derived
+  tools: 12
+  checked: '2026-08-12'
+  source: catalog MCP census

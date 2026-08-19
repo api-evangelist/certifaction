@@ -1,0 +1,397 @@
+{
+  "item": [
+    {
+      "id": "6ad0ea32-968e-4d2d-947d-659a205bdfdb",
+      "name": "Account",
+      "description": {
+        "content": "Access your user account data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5ad79b91-d8e2-4fed-98ad-72bd4edafbf6",
+          "name": "Check account QES status",
+          "request": {
+            "name": "Check account QES status",
+            "description": {},
+            "url": {
+              "path": [
+                "qes",
+                "check"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jurisdiction\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f91ce58a-e89f-4efc-b9a1-c9bdf3be5514",
+              "name": "QES is enabled for your account.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "qes",
+                    "check"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jurisdiction\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d6d3c16d-8983-4ec9-a0c4-a1c8a82d7ae4",
+              "name": "The request is not properly formed. For example, the content could not be read.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "qes",
+                    "check"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jurisdiction\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ca4e539b-d129-4e5d-bbda-6b0fcd34cf69",
+              "name": "You are not authorized to carry out the operation. Check that your API key is correct.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "qes",
+                    "check"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jurisdiction\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "51643fc3-8c96-4e00-bc06-22c897e63daf",
+              "name": "QES is disabled for your account.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "qes",
+                    "check"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jurisdiction\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e5e00cdb-3db0-4a5c-8450-092d2dace1e1",
+          "name": "Get account data",
+          "request": {
+            "name": "Get account data",
+            "description": {},
+            "url": {
+              "path": [
+                "user"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1aa3f838-0881-4218-b694-490c5d8d9c45",
+              "name": "The user data for your account.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 2061,\n  \"uid\": \"string\",\n  \"external_id\": \"string\",\n  \"email\": \"string\",\n  \"title\": \"string\",\n  \"name\": \"string\",\n  \"first_name\": \"string\",\n  \"middle_names\": \"string\",\n  \"last_name\": \"string\",\n  \"affiliation\": \"string\",\n  \"address\": \"string\",\n  \"postalcode\": \"string\",\n  \"location\": \"string\",\n  \"eth_address\": \"string\",\n  \"quota\": 7399,\n  \"disabled\": true,\n  \"file_suffix\": \"string\",\n  \"permissions\": [\n    \"string\",\n    \"string\"\n  ],\n  \"subscription_type\": \"string\",\n  \"encrypt_claims\": false,\n  \"verified_by\": \"string\",\n  \"features\": {},\n  \"organizations\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"subscription_type\": \"string\",\n      \"quota\": 4008\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"subscription_type\": \"string\",\n      \"quota\": 9611\n    }\n  ],\n  \"identities\": [\n    {\n      \"uid\": \"string\",\n      \"user_uid\": \"string\",\n      \"issuer\": \"string\",\n      \"status\": \"string\",\n      \"verification_url\": \"string\",\n      \"verification_id\": \"string\",\n      \"evidence_url\": \"string\",\n      \"proof\": \"string\",\n      \"name\": \"string\",\n      \"given_name\": \"string\",\n      \"family_name\": \"string\",\n      \"birthday\": \"string\",\n      \"signature_level\": \"string\",\n      \"signature_jurisdiction\": \"string\"\n    },\n    {\n      \"uid\": \"string\",\n      \"user_uid\": \"string\",\n      \"issuer\": \"string\",\n      \"status\": \"string\",\n      \"verification_url\": \"string\",\n      \"verification_id\": \"string\",\n      \"evidence_url\": \"string\",\n      \"proof\": \"string\",\n      \"name\": \"string\",\n      \"given_name\": \"string\",\n      \"family_name\": \"string\",\n      \"birthday\": \"string\",\n      \"signature_level\": \"string\",\n      \"signature_jurisdiction\": \"string\"\n    }\n  ],\n  \"theme\": {\n    \"name\": \"string\"\n  },\n  \"name_verified\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc6e8224-3eff-438f-804a-a8fd641c07ea",
+              "name": "You are not authorized to carry out the operation. Check that your API key is correct.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "{{ .APIServerURL }}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4014196d-9b97-471f-80af-d9ae8975b72b",
+    "name": "{{ .ProductName }} Admin Account API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "{{ .ProductName }} Admin API is used to manage users, roles and teamspaces.\n\n## Setup requirements\n\nAuthentication is required to perform some operations. Please refer to the [Authentication](https://developers.certifaction.com/en/references/authentication) section to obtain an API Key or token.\n",
+      "type": "text/plain"
+    }
+  }
+}

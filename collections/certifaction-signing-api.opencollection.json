@@ -1,0 +1,580 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "{{ .ProductName }} Admin Account Signing API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Signing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Prepare a file for signing",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{ .APIServerURL }}/prepare",
+            "headers": [
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "digital-twin",
+                "value": "",
+                "type": "query",
+                "description": "Enable Digital Twin for the document."
+              },
+              {
+                "name": "pdf-a",
+                "value": "",
+                "type": "query",
+                "description": "Enable PDF/A compatibility"
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "signature-anchors",
+                "value": "",
+                "type": "query",
+                "description": "Place a signature card relative to plain text already present in the document. The value is a\nURL-encoded JSON object describing a single anchor; repeat the parameter to add more anchors\n(one object each). When provided, placeholder mode is enabled automatically: prepare the\ndocument with the anchors first, then sign each resulting placeholder via `/sign` or\n`/register` using its `id`.\n\n**Important**: on `/prepare`, anchors are only supported with `scope=sign` and a PAdES-enabled\naccount. The anchor text must be extractable from the PDF (searchable text, not a scanned\nimage).\n\nFields (`id` and `anchor` are required; entries missing either are rejected with `400`):\n\n- `id`: unique placeholder name to sign against.\n- `anchor`: plain text to search for in the document.\n- `occurrence`: which match to use when the anchor repeats (1-based, defaults to 1).\n- `x`, `y`: offset from the matched text's top-left (`x`+ right, `y`+ down); units `cm`/`mm`/`in`/`pt`.\n- `w`, `h`: card size (units `cm`/`mm`/`in`/`pt`). Only `w` derives the height from the aspect ratio; only `h` derives the width; without either, the base width is used.\n- `removeAnchor`: strip the matched anchor text from the PDF (defaults to `false`).\n\nJSON values must be percent-encoded in the query string, e.g. `{\"id\":\"signer1\",\"anchor\":\"signatures\"}`\nbecomes `%7B%22id%22%3A%22signer1%22%2C%22anchor%22%3A%22signatures%22%7D`.\n"
+              },
+              {
+                "name": "additional-page",
+                "value": "",
+                "type": "query",
+                "description": "Whether to place Digital Twin and signatures on an additional page or inline."
+              },
+              {
+                "name": "qr-llx",
+                "value": "",
+                "type": "query",
+                "description": "The x-coordinate of the Digital Twin QR code from the lower left corner of the document.\nThis is required when `additional-page=false`.\n"
+              },
+              {
+                "name": "qr-lly",
+                "value": "",
+                "type": "query",
+                "description": "The y-coordinate of the Digital Twin QR code from the lower left corner of the document.\nThis is required when `additional-page=false`.\n"
+              },
+              {
+                "name": "qr-height",
+                "value": "",
+                "type": "query",
+                "description": "The height of the Digital Twin QR code. This is required when `additional-page=false`."
+              },
+              {
+                "name": "qr-page",
+                "value": "",
+                "type": "query",
+                "description": "The page to place the Digital Twin QR code on. This is required when `additional-page=false`."
+              },
+              {
+                "name": "encryption-key",
+                "value": "",
+                "type": "query",
+                "description": "A hexadecimal string to encrypt the document with."
+              },
+              {
+                "name": "password-encryption",
+                "value": "",
+                "type": "query",
+                "description": "The password encryption algorithm to use in encrypting the encryption key."
+              }
+            ]
+          },
+          "docs": "Prepare a file for signing"
+        },
+        {
+          "info": {
+            "name": "Sign a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{ .APIServerURL }}/sign",
+            "headers": [
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "digital-twin",
+                "value": "",
+                "type": "query",
+                "description": "Enable Digital Twin for the document."
+              },
+              {
+                "name": "pdf-a",
+                "value": "",
+                "type": "query",
+                "description": "Enable PDF/A compatibility"
+              },
+              {
+                "name": "additional-page",
+                "value": "",
+                "type": "query",
+                "description": "Whether to place Digital Twin and signatures on an additional page or inline."
+              },
+              {
+                "name": "qr-llx",
+                "value": "",
+                "type": "query",
+                "description": "The x-coordinate of the Digital Twin QR code from the lower left corner of the document.\nThis is required when `additional-page=false`.\n"
+              },
+              {
+                "name": "qr-lly",
+                "value": "",
+                "type": "query",
+                "description": "The y-coordinate of the Digital Twin QR code from the lower left corner of the document.\nThis is required when `additional-page=false`.\n"
+              },
+              {
+                "name": "qr-height",
+                "value": "",
+                "type": "query",
+                "description": "The height of the Digital Twin QR code. This is required when `additional-page=false`."
+              },
+              {
+                "name": "qr-page",
+                "value": "",
+                "type": "query",
+                "description": "The page to place the Digital Twin QR code on. This is required when `additional-page=false`."
+              },
+              {
+                "name": "encryption-key",
+                "value": "",
+                "type": "query",
+                "description": "A hexadecimal string to encrypt the document with."
+              },
+              {
+                "name": "password-encryption",
+                "value": "",
+                "type": "query",
+                "description": "The password encryption algorithm to use in encrypting the encryption key."
+              },
+              {
+                "name": "hash",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "note",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "legal-weight",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filename",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "no-prepare",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "position-x",
+                "value": "",
+                "type": "query",
+                "description": "The x-coordinate of the signature from the bottom-left of the page.\nThis is required when `additional-page=false`.\n"
+              },
+              {
+                "name": "position-y",
+                "value": "",
+                "type": "query",
+                "description": "The y-coordinate of the signature from the bottom-left of the page.\nThis is required when `additional-page=false`.\n"
+              },
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "The height of the signature card. This is required when `additional-page=false`."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page to place the signature on. This is required when `additional-page=false`."
+              }
+            ]
+          },
+          "docs": "Sign a file"
+        },
+        {
+          "info": {
+            "name": "Request a signature",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{ .APIServerURL }}/request/create",
+            "headers": [
+              {
+                "name": "Accept-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "digital-twin",
+                "value": "",
+                "type": "query",
+                "description": "Enable Digital Twin for the document."
+              },
+              {
+                "name": "pdf-a",
+                "value": "",
+                "type": "query",
+                "description": "Enable PDF/A compatibility"
+              },
+              {
+                "name": "send-email",
+                "value": "",
+                "type": "query",
+                "description": "If `send-email=true`, the server will send the signature request to the signer's email\nand also send reminder emails to get them to sign.\n"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "first-name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "middle-names",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "last-name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "The signer's email address."
+              },
+              {
+                "name": "mobile-phone",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "citizenship",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "birthday",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "gender",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "domicile",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "webhook-url",
+                "value": "",
+                "type": "query",
+                "description": "URL-encoded callback URL that will be called with a `POST` request upon completion of the signature.\nSee [Webhooks](https://developers.certifaction.com/en/guides/webhooks) for authentication and\nretry details.\n"
+              },
+              {
+                "name": "additional-page",
+                "value": "",
+                "type": "query",
+                "description": "Whether to place Digital Twin and signatures on an additional page or inline."
+              },
+              {
+                "name": "qr-llx",
+                "value": "",
+                "type": "query",
+                "description": "The x-coordinate of the Digital Twin QR code from the lower left corner of the document.\nThis is required when `additional-page=false`.\n"
+              },
+              {
+                "name": "qr-lly",
+                "value": "",
+                "type": "query",
+                "description": "The y-coordinate of the Digital Twin QR code from the lower left corner of the document.\nThis is required when `additional-page=false`.\n"
+              },
+              {
+                "name": "qr-height",
+                "value": "",
+                "type": "query",
+                "description": "The height of the Digital Twin QR code. This is required when `additional-page=false`."
+              },
+              {
+                "name": "qr-page",
+                "value": "",
+                "type": "query",
+                "description": "The page to place the Digital Twin QR code on. This is required when `additional-page=false`."
+              },
+              {
+                "name": "encryption-key",
+                "value": "",
+                "type": "query",
+                "description": "A hexadecimal string to encrypt the document with."
+              },
+              {
+                "name": "password-encryption",
+                "value": "",
+                "type": "query",
+                "description": "The password encryption algorithm to use in encrypting the encryption key."
+              },
+              {
+                "name": "with-password",
+                "value": "",
+                "type": "query",
+                "description": "Protect the request using a password so that only the password bearer can sign.\nIf enabled, a password will be generated. Send the password, together with the request URL, to the signer.\n"
+              },
+              {
+                "name": "hash",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "message",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "transaction-id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "auto-sign",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "legal-weight",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "jurisdiction",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filename",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "no-prepare",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "position-x",
+                "value": "",
+                "type": "query",
+                "description": "The x-coordinate of the signature from the bottom-left of the page.\nThis is required when `additional-page=false`.\n"
+              },
+              {
+                "name": "position-y",
+                "value": "",
+                "type": "query",
+                "description": "The y-coordinate of the signature from the bottom-left of the page.\nThis is required when `additional-page=false`.\n"
+              },
+              {
+                "name": "height",
+                "value": "",
+                "type": "query",
+                "description": "The height of the signature card. This is required when `additional-page=false`."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page to place the signature on. This is required when `additional-page=false`."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Request a signature"
+        },
+        {
+          "info": {
+            "name": "Cancel signature request for signer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{ .APIServerURL }}/request/cancel",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "The email of the signer to cancel the request for."
+              },
+              {
+                "name": "note",
+                "value": "",
+                "type": "query",
+                "description": "A message to the signer. You can use this to explain why you cancelled the request."
+              }
+            ]
+          },
+          "docs": "Cancel signature request for signer"
+        },
+        {
+          "info": {
+            "name": "Cancel signature requests for file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{ .APIServerURL }}/request/cancel/all",
+            "params": [
+              {
+                "name": "note",
+                "value": "",
+                "type": "query",
+                "description": "A message to the signers. You can use this to explain why you cancelled the request."
+              }
+            ]
+          },
+          "docs": "Cancel signature requests for file"
+        },
+        {
+          "info": {
+            "name": "List signature requests for file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{ .APIServerURL }}/request/list",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "file",
+                  "value": ""
+                },
+                {
+                  "name": "password",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "List signature requests for file"
+        },
+        {
+          "info": {
+            "name": "Show status of signature request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{ .APIServerURL }}/request/status",
+            "params": [
+              {
+                "name": "request_url",
+                "value": "",
+                "type": "query",
+                "description": "The URL of the signature request to check."
+              },
+              {
+                "name": "password",
+                "value": "",
+                "type": "query",
+                "description": "Password for password encrypted requests"
+              }
+            ]
+          },
+          "docs": "Show status of signature request"
+        },
+        {
+          "info": {
+            "name": "Show status of signature requests of given file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{ .APIServerURL }}/request/file/status",
+            "params": [
+              {
+                "name": "file_url",
+                "value": "",
+                "type": "query",
+                "description": "The DA URL of the file to check."
+              },
+              {
+                "name": "password",
+                "value": "",
+                "type": "query",
+                "description": "Password for password encrypted document."
+              }
+            ]
+          },
+          "docs": "Show status of signature requests of given file"
+        },
+        {
+          "info": {
+            "name": "Check account QES status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{ .APIServerURL }}/qes/check",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Check account QES status"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

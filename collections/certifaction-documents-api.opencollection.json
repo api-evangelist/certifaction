@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "{{ .ProductName }} Admin Account Documents API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Remove {{ .ProductName }}'s access to a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{ .APIServerURL }}/delete-access"
+          },
+          "docs": "Remove {{ .ProductName }}'s access to a file"
+        },
+        {
+          "info": {
+            "name": "Download files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{ .APIServerURL }}/download",
+            "params": [
+              {
+                "name": "file",
+                "value": "",
+                "type": "query",
+                "description": "A Digital Archive URL"
+              },
+              {
+                "name": "password",
+                "value": "",
+                "type": "query",
+                "description": "The signature request password, if Privacy 2.0 was enabled"
+              }
+            ]
+          },
+          "docs": "Download files"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

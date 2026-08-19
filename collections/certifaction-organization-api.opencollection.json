@@ -1,0 +1,106 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "{{ .ProductName }} Admin Account Organization API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Organization",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get your organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{ .APIServerURL }}/organization"
+          },
+          "docs": "Get your organization"
+        },
+        {
+          "info": {
+            "name": "Invite user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{ .APIServerURL }}/organization/:id/user",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the organization to which you want to invite the user"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A user could be invited multiple times, assuming he didn't accept the invite yet. An email is sent out for each invitation"
+        },
+        {
+          "info": {
+            "name": "Remove a user from an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{ .APIServerURL }}/organization/:id/user",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the organization"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove a user from an organization"
+        },
+        {
+          "info": {
+            "name": "Change the role of a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{ .APIServerURL }}/organization/:organization_id/role",
+            "params": [
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the organization"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Change a user's role in an organization, using either user UID or invite email."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

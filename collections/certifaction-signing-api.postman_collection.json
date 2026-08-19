@@ -1,0 +1,3846 @@
+{
+  "item": [
+    {
+      "id": "d0509845-4cbc-4f83-9324-dea02e7ebbcc",
+      "name": "Signing",
+      "description": {
+        "content": "Sign files and request signatures",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "82cf8ffd-c86a-4b84-8f71-4c52a2cefad6",
+          "name": "Prepare a file for signing",
+          "request": {
+            "name": "Prepare a file for signing",
+            "description": {},
+            "url": {
+              "path": [
+                "prepare"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "digital-twin",
+                  "value": "false",
+                  "description": "Enable Digital Twin for the document."
+                },
+                {
+                  "disabled": false,
+                  "key": "pdf-a",
+                  "value": "false",
+                  "description": "Enable PDF/A compatibility"
+                },
+                {
+                  "disabled": false,
+                  "key": "scope",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "signature-anchors",
+                  "value": "<string>",
+                  "description": "Place a signature card relative to plain text already present in the document. The value is a\nURL-encoded JSON object describing a single anchor; repeat the parameter to add more anchors\n(one object each). When provided, placeholder mode is enabled automatically: prepare the\ndocument with the anchors first, then sign each resulting placeholder via `/sign` or\n`/register` using its `id`.\n\n**Important**: on `/prepare`, anchors are only supported with `scope=sign` and a PAdES-enabled\naccount. The anchor text must be extractable from the PDF (searchable text, not a scanned\nimage).\n\nFields (`id` and `anchor` are required; entries missing either are rejected with `400`):\n\n- `id`: unique placeholder name to sign against.\n- `anchor`: plain text to search for in the document.\n- `occurrence`: which match to use when the anchor repeats (1-based, defaults to 1).\n- `x`, `y`: offset from the matched text's top-left (`x`+ right, `y`+ down); units `cm`/`mm`/`in`/`pt`.\n- `w`, `h`: card size (units `cm`/`mm`/`in`/`pt`). Only `w` derives the height from the aspect ratio; only `h` derives the width; without either, the base width is used.\n- `removeAnchor`: strip the matched anchor text from the PDF (defaults to `false`).\n\nJSON values must be percent-encoded in the query string, e.g. `{\"id\":\"signer1\",\"anchor\":\"signatures\"}`\nbecomes `%7B%22id%22%3A%22signer1%22%2C%22anchor%22%3A%22signatures%22%7D`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "signature-anchors",
+                  "value": "<string>",
+                  "description": "Place a signature card relative to plain text already present in the document. The value is a\nURL-encoded JSON object describing a single anchor; repeat the parameter to add more anchors\n(one object each). When provided, placeholder mode is enabled automatically: prepare the\ndocument with the anchors first, then sign each resulting placeholder via `/sign` or\n`/register` using its `id`.\n\n**Important**: on `/prepare`, anchors are only supported with `scope=sign` and a PAdES-enabled\naccount. The anchor text must be extractable from the PDF (searchable text, not a scanned\nimage).\n\nFields (`id` and `anchor` are required; entries missing either are rejected with `400`):\n\n- `id`: unique placeholder name to sign against.\n- `anchor`: plain text to search for in the document.\n- `occurrence`: which match to use when the anchor repeats (1-based, defaults to 1).\n- `x`, `y`: offset from the matched text's top-left (`x`+ right, `y`+ down); units `cm`/`mm`/`in`/`pt`.\n- `w`, `h`: card size (units `cm`/`mm`/`in`/`pt`). Only `w` derives the height from the aspect ratio; only `h` derives the width; without either, the base width is used.\n- `removeAnchor`: strip the matched anchor text from the PDF (defaults to `false`).\n\nJSON values must be percent-encoded in the query string, e.g. `{\"id\":\"signer1\",\"anchor\":\"signatures\"}`\nbecomes `%7B%22id%22%3A%22signer1%22%2C%22anchor%22%3A%22signatures%22%7D`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "additional-page",
+                  "value": "true",
+                  "description": "Whether to place Digital Twin and signatures on an additional page or inline."
+                },
+                {
+                  "disabled": false,
+                  "key": "qr-llx",
+                  "value": "<number>",
+                  "description": "The x-coordinate of the Digital Twin QR code from the lower left corner of the document.\nThis is required when `additional-page=false`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "qr-lly",
+                  "value": "<number>",
+                  "description": "The y-coordinate of the Digital Twin QR code from the lower left corner of the document.\nThis is required when `additional-page=false`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "qr-height",
+                  "value": "<number>",
+                  "description": "The height of the Digital Twin QR code. This is required when `additional-page=false`."
+                },
+                {
+                  "disabled": false,
+                  "key": "qr-page",
+                  "value": "<integer>",
+                  "description": "The page to place the Digital Twin QR code on. This is required when `additional-page=false`."
+                },
+                {
+                  "disabled": false,
+                  "key": "encryption-key",
+                  "value": "<string>",
+                  "description": "A hexadecimal string to encrypt the document with."
+                },
+                {
+                  "disabled": false,
+                  "key": "password-encryption",
+                  "value": "<string>",
+                  "description": "The password encryption algorithm to use in encrypting the encryption key."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The language for text object placed added to the document. Pass `de` for German, `en` for English,\n`fr` for French, or `it` for Italian.\n",
+                "key": "Accept-Language",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/pdf"
+              },
+              {
+                "key": "Accept",
+                "value": "application/pdf"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            }
+          },
+          "response": [
+            {
+              "id": "af4d1efc-ec35-4679-87ad-754d21aca5b3",
+              "name": "The prepared file content.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "prepare"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "digital-twin",
+                      "value": "false"
+                    },
+                    {
+                      "key": "pdf-a",
+                      "value": "false"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "attachment"
+                    },
+                    {
+                      "key": "signature-anchors",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signature-anchors",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "additional-page",
+                      "value": "true"
+                    },
+                    {
+                      "key": "qr-llx",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "qr-lly",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "qr-height",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "qr-page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "encryption-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "password-encryption",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The language for text object placed added to the document. Pass `de` for German, `en` for English,\n`fr` for French, or `it` for Italian.\n",
+                    "key": "Accept-Language",
+                    "value": "it"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/pdf"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/pdf"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b4774db8-df79-42d8-9dd8-c604b9358695",
+              "name": "The request is not properly formed. For example, the content could not be read.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "prepare"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "digital-twin",
+                      "value": "false"
+                    },
+                    {
+                      "key": "pdf-a",
+                      "value": "false"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "attachment"
+                    },
+                    {
+                      "key": "signature-anchors",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signature-anchors",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "additional-page",
+                      "value": "true"
+                    },
+                    {
+                      "key": "qr-llx",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "qr-lly",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "qr-height",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "qr-page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "encryption-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "password-encryption",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The language for text object placed added to the document. Pass `de` for German, `en` for English,\n`fr` for French, or `it` for Italian.\n",
+                    "key": "Accept-Language",
+                    "value": "it"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c0342788-2f51-4428-8f78-7ca22d0e0419",
+              "name": "You are not authorized to carry out the operation. Check that your API key is correct.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "prepare"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "digital-twin",
+                      "value": "false"
+                    },
+                    {
+                      "key": "pdf-a",
+                      "value": "false"
+                    },
+                    {
+                      "key": "scope",
+                      "value": "attachment"
+                    },
+                    {
+                      "key": "signature-anchors",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "signature-anchors",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "additional-page",
+                      "value": "true"
+                    },
+                    {
+                      "key": "qr-llx",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "qr-lly",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "qr-height",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "qr-page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "encryption-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "password-encryption",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The language for text object placed added to the document. Pass `de` for German, `en` for English,\n`fr` for French, or `it` for Italian.\n",
+                    "key": "Accept-Language",
+                    "value": "it"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "407ef76f-9fd8-4024-a747-c785fd9caa45",
+          "name": "Sign a file",
+          "request": {
+            "name": "Sign a file",
+            "description": {},
+            "url": {
+              "path": [
+                "sign"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "digital-twin",
+                  "value": "false",
+                  "description": "Enable Digital Twin for the document."
+                },
+                {
+                  "disabled": false,
+                  "key": "pdf-a",
+                  "value": "false",
+                  "description": "Enable PDF/A compatibility"
+                },
+                {
+                  "disabled": false,
+                  "key": "additional-page",
+                  "value": "true",
+                  "description": "Whether to place Digital Twin and signatures on an additional page or inline."
+                },
+                {
+                  "disabled": false,
+                  "key": "qr-llx",
+                  "value": "<number>",
+                  "description": "The x-coordinate of the Digital Twin QR code from the lower left corner of the document.\nThis is required when `additional-page=false`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "qr-lly",
+                  "value": "<number>",
+                  "description": "The y-coordinate of the Digital Twin QR code from the lower left corner of the document.\nThis is required when `additional-page=false`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "qr-height",
+                  "value": "<number>",
+                  "description": "The height of the Digital Twin QR code. This is required when `additional-page=false`."
+                },
+                {
+                  "disabled": false,
+                  "key": "qr-page",
+                  "value": "<integer>",
+                  "description": "The page to place the Digital Twin QR code on. This is required when `additional-page=false`."
+                },
+                {
+                  "disabled": false,
+                  "key": "encryption-key",
+                  "value": "<string>",
+                  "description": "A hexadecimal string to encrypt the document with."
+                },
+                {
+                  "disabled": false,
+                  "key": "password-encryption",
+                  "value": "<string>",
+                  "description": "The password encryption algorithm to use in encrypting the encryption key."
+                },
+                {
+                  "disabled": false,
+                  "key": "hash",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "note",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "legal-weight",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "jurisdiction",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filename",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "no-prepare",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "position-x",
+                  "value": "<number>",
+                  "description": "The x-coordinate of the signature from the bottom-left of the page.\nThis is required when `additional-page=false`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "position-y",
+                  "value": "<number>",
+                  "description": "The y-coordinate of the signature from the bottom-left of the page.\nThis is required when `additional-page=false`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<number>",
+                  "description": "The height of the signature card. This is required when `additional-page=false`."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "The page to place the signature on. This is required when `additional-page=false`."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The language for text object placed added to the document. Pass `de` for German, `en` for English,\n`fr` for French, or `it` for Italian.\n",
+                "key": "Accept-Language",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/pdf"
+              },
+              {
+                "key": "Accept",
+                "value": "application/pdf"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            }
+          },
+          "response": [
+            {
+              "id": "5ca7e297-fbf5-467e-8bfb-7c491545850d",
+              "name": "The signed file content.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "digital-twin",
+                      "value": "false"
+                    },
+                    {
+                      "key": "pdf-a",
+                      "value": "false"
+                    },
+                    {
+                      "key": "additional-page",
+                      "value": "true"
+                    },
+                    {
+                      "key": "qr-llx",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "qr-lly",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "qr-height",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "qr-page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "encryption-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "password-encryption",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hash",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "note",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "legal-weight",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "jurisdiction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filename",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "no-prepare",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "position-x",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "position-y",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "height",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The language for text object placed added to the document. Pass `de` for German, `en` for English,\n`fr` for French, or `it` for Italian.\n",
+                    "key": "Accept-Language",
+                    "value": "it"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/pdf"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/pdf"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9700bbc2-4e16-4cbd-a8cd-c1772e7dec32",
+              "name": "The request is not properly formed. For example, the content could not be read.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "digital-twin",
+                      "value": "false"
+                    },
+                    {
+                      "key": "pdf-a",
+                      "value": "false"
+                    },
+                    {
+                      "key": "additional-page",
+                      "value": "true"
+                    },
+                    {
+                      "key": "qr-llx",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "qr-lly",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "qr-height",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "qr-page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "encryption-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "password-encryption",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hash",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "note",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "legal-weight",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "jurisdiction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filename",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "no-prepare",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "position-x",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "position-y",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "height",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The language for text object placed added to the document. Pass `de` for German, `en` for English,\n`fr` for French, or `it` for Italian.\n",
+                    "key": "Accept-Language",
+                    "value": "it"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b8d92ff3-b450-42dc-9864-0956e91ac81b",
+              "name": "You are not authorized to carry out the operation. Check that your API key is correct.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "digital-twin",
+                      "value": "false"
+                    },
+                    {
+                      "key": "pdf-a",
+                      "value": "false"
+                    },
+                    {
+                      "key": "additional-page",
+                      "value": "true"
+                    },
+                    {
+                      "key": "qr-llx",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "qr-lly",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "qr-height",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "qr-page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "encryption-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "password-encryption",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hash",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "note",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "legal-weight",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "jurisdiction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filename",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "no-prepare",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "position-x",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "position-y",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "height",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The language for text object placed added to the document. Pass `de` for German, `en` for English,\n`fr` for French, or `it` for Italian.\n",
+                    "key": "Accept-Language",
+                    "value": "it"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "443bd81e-6bf2-4799-9514-3eb277b21936",
+          "name": "Request a signature",
+          "request": {
+            "name": "Request a signature",
+            "description": {},
+            "url": {
+              "path": [
+                "request",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "digital-twin",
+                  "value": "false",
+                  "description": "Enable Digital Twin for the document."
+                },
+                {
+                  "disabled": false,
+                  "key": "pdf-a",
+                  "value": "false",
+                  "description": "Enable PDF/A compatibility"
+                },
+                {
+                  "disabled": false,
+                  "key": "send-email",
+                  "value": "false",
+                  "description": "If `send-email=true`, the server will send the signature request to the signer's email\nand also send reminder emails to get them to sign.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "first-name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "middle-names",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "last-name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<email>",
+                  "description": "(Required) The signer's email address."
+                },
+                {
+                  "disabled": false,
+                  "key": "mobile-phone",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "citizenship",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "birthday",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "gender",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "domicile",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "webhook-url",
+                  "value": "<url>",
+                  "description": "URL-encoded callback URL that will be called with a `POST` request upon completion of the signature.\nSee [Webhooks](https://developers.certifaction.com/en/guides/webhooks) for authentication and\nretry details.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "additional-page",
+                  "value": "true",
+                  "description": "Whether to place Digital Twin and signatures on an additional page or inline."
+                },
+                {
+                  "disabled": false,
+                  "key": "qr-llx",
+                  "value": "<number>",
+                  "description": "The x-coordinate of the Digital Twin QR code from the lower left corner of the document.\nThis is required when `additional-page=false`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "qr-lly",
+                  "value": "<number>",
+                  "description": "The y-coordinate of the Digital Twin QR code from the lower left corner of the document.\nThis is required when `additional-page=false`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "qr-height",
+                  "value": "<number>",
+                  "description": "The height of the Digital Twin QR code. This is required when `additional-page=false`."
+                },
+                {
+                  "disabled": false,
+                  "key": "qr-page",
+                  "value": "<integer>",
+                  "description": "The page to place the Digital Twin QR code on. This is required when `additional-page=false`."
+                },
+                {
+                  "disabled": false,
+                  "key": "encryption-key",
+                  "value": "<string>",
+                  "description": "A hexadecimal string to encrypt the document with."
+                },
+                {
+                  "disabled": false,
+                  "key": "password-encryption",
+                  "value": "<string>",
+                  "description": "The password encryption algorithm to use in encrypting the encryption key."
+                },
+                {
+                  "disabled": false,
+                  "key": "with-password",
+                  "value": "<boolean>",
+                  "description": "Protect the request using a password so that only the password bearer can sign.\nIf enabled, a password will be generated. Send the password, together with the request URL, to the signer.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "hash",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "message",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "transaction-id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "auto-sign",
+                  "value": "false"
+                },
+                {
+                  "disabled": false,
+                  "key": "legal-weight",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "jurisdiction",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filename",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "no-prepare",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "position-x",
+                  "value": "<number>",
+                  "description": "The x-coordinate of the signature from the bottom-left of the page.\nThis is required when `additional-page=false`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "position-y",
+                  "value": "<number>",
+                  "description": "The y-coordinate of the signature from the bottom-left of the page.\nThis is required when `additional-page=false`.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<number>",
+                  "description": "The height of the signature card. This is required when `additional-page=false`."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "The page to place the signature on. This is required when `additional-page=false`."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The language for text object placed added to the document. Pass `de` for German, `en` for English,\n`fr` for French, or `it` for Italian.\n",
+                "key": "Accept-Language",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "files",
+                  "value": "<url>",
+                  "description": "DA URLs to the documents to sign. Previous signing links can be reused.\nIf a link to a password-protected request is provided, also pass the `password` parameter.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "files",
+                  "value": "<url>",
+                  "description": "DA URLs to the documents to sign. Previous signing links can be reused.\nIf a link to a password-protected request is provided, also pass the `password` parameter.\n"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "37585c55-6eac-4ab1-a951-d624b5771035",
+              "name": "The signature request was created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "digital-twin",
+                      "value": "false"
+                    },
+                    {
+                      "key": "pdf-a",
+                      "value": "false"
+                    },
+                    {
+                      "key": "send-email",
+                      "value": "false"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "first-name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "middle-names",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "last-name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "key": "mobile-phone",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "citizenship",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "birthday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "gender",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domicile",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "webhook-url",
+                      "value": "<url>"
+                    },
+                    {
+                      "key": "additional-page",
+                      "value": "true"
+                    },
+                    {
+                      "key": "qr-llx",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "qr-lly",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "qr-height",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "qr-page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "encryption-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "password-encryption",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "with-password",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "hash",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "message",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "auto-sign",
+                      "value": "false"
+                    },
+                    {
+                      "key": "legal-weight",
+                      "value": "QES"
+                    },
+                    {
+                      "key": "jurisdiction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filename",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "no-prepare",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "position-x",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "position-y",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "height",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The language for text object placed added to the document. Pass `de` for German, `en` for English,\n`fr` for French, or `it` for Italian.\n",
+                    "key": "Accept-Language",
+                    "value": "it"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "DA URLs to the documents to sign. Previous signing links can be reused.\nIf a link to a password-protected request is provided, also pass the `password` parameter.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "files",
+                      "value": "<url>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "DA URLs to the documents to sign. Previous signing links can be reused.\nIf a link to a password-protected request is provided, also pass the `password` parameter.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "files",
+                      "value": "<url>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request_url\": \"string\",\n  \"password\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1c6a92a-7628-42e1-a069-40440d4913fa",
+              "name": "The request is not properly formed. For example, the content could not be read.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "digital-twin",
+                      "value": "false"
+                    },
+                    {
+                      "key": "pdf-a",
+                      "value": "false"
+                    },
+                    {
+                      "key": "send-email",
+                      "value": "false"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "first-name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "middle-names",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "last-name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "key": "mobile-phone",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "citizenship",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "birthday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "gender",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domicile",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "webhook-url",
+                      "value": "<url>"
+                    },
+                    {
+                      "key": "additional-page",
+                      "value": "true"
+                    },
+                    {
+                      "key": "qr-llx",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "qr-lly",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "qr-height",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "qr-page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "encryption-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "password-encryption",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "with-password",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "hash",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "message",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "auto-sign",
+                      "value": "false"
+                    },
+                    {
+                      "key": "legal-weight",
+                      "value": "QES"
+                    },
+                    {
+                      "key": "jurisdiction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filename",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "no-prepare",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "position-x",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "position-y",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "height",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The language for text object placed added to the document. Pass `de` for German, `en` for English,\n`fr` for French, or `it` for Italian.\n",
+                    "key": "Accept-Language",
+                    "value": "it"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "DA URLs to the documents to sign. Previous signing links can be reused.\nIf a link to a password-protected request is provided, also pass the `password` parameter.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "files",
+                      "value": "<url>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "DA URLs to the documents to sign. Previous signing links can be reused.\nIf a link to a password-protected request is provided, also pass the `password` parameter.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "files",
+                      "value": "<url>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "60c13c28-6d78-4281-ad4a-08d401f636f9",
+              "name": "You are not authorized to carry out the operation. Check that your API key is correct.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "digital-twin",
+                      "value": "false"
+                    },
+                    {
+                      "key": "pdf-a",
+                      "value": "false"
+                    },
+                    {
+                      "key": "send-email",
+                      "value": "false"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "first-name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "middle-names",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "last-name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "key": "mobile-phone",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "citizenship",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "birthday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "gender",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domicile",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "webhook-url",
+                      "value": "<url>"
+                    },
+                    {
+                      "key": "additional-page",
+                      "value": "true"
+                    },
+                    {
+                      "key": "qr-llx",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "qr-lly",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "qr-height",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "qr-page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "encryption-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "password-encryption",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "with-password",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "hash",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "message",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "auto-sign",
+                      "value": "false"
+                    },
+                    {
+                      "key": "legal-weight",
+                      "value": "QES"
+                    },
+                    {
+                      "key": "jurisdiction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filename",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "no-prepare",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "position-x",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "position-y",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "height",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The language for text object placed added to the document. Pass `de` for German, `en` for English,\n`fr` for French, or `it` for Italian.\n",
+                    "key": "Accept-Language",
+                    "value": "it"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "DA URLs to the documents to sign. Previous signing links can be reused.\nIf a link to a password-protected request is provided, also pass the `password` parameter.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "files",
+                      "value": "<url>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "DA URLs to the documents to sign. Previous signing links can be reused.\nIf a link to a password-protected request is provided, also pass the `password` parameter.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "files",
+                      "value": "<url>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "52167c67-305a-471a-b0c2-e087bb3925ce",
+              "name": "The signer already has a pending signature request for the file.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "digital-twin",
+                      "value": "false"
+                    },
+                    {
+                      "key": "pdf-a",
+                      "value": "false"
+                    },
+                    {
+                      "key": "send-email",
+                      "value": "false"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "first-name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "middle-names",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "last-name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "key": "mobile-phone",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "citizenship",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "birthday",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "gender",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domicile",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "webhook-url",
+                      "value": "<url>"
+                    },
+                    {
+                      "key": "additional-page",
+                      "value": "true"
+                    },
+                    {
+                      "key": "qr-llx",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "qr-lly",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "qr-height",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "qr-page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "encryption-key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "password-encryption",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "with-password",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "hash",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "message",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transaction-id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "auto-sign",
+                      "value": "false"
+                    },
+                    {
+                      "key": "legal-weight",
+                      "value": "QES"
+                    },
+                    {
+                      "key": "jurisdiction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filename",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "no-prepare",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "position-x",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "position-y",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "height",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The language for text object placed added to the document. Pass `de` for German, `en` for English,\n`fr` for French, or `it` for Italian.\n",
+                    "key": "Accept-Language",
+                    "value": "it"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "DA URLs to the documents to sign. Previous signing links can be reused.\nIf a link to a password-protected request is provided, also pass the `password` parameter.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "files",
+                      "value": "<url>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "DA URLs to the documents to sign. Previous signing links can be reused.\nIf a link to a password-protected request is provided, also pass the `password` parameter.\n",
+                        "type": "text/plain"
+                      },
+                      "key": "files",
+                      "value": "<url>"
+                    }
+                  ]
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ef37eaa4-e693-463b-84ac-330d17bb8221",
+          "name": "Cancel signature request for signer",
+          "request": {
+            "name": "Cancel signature request for signer",
+            "description": {},
+            "url": {
+              "path": [
+                "request",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<email>",
+                  "description": "(Required) The email of the signer to cancel the request for."
+                },
+                {
+                  "disabled": false,
+                  "key": "note",
+                  "value": "<string>",
+                  "description": "A message to the signer. You can use this to explain why you cancelled the request."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/pdf"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            }
+          },
+          "response": [
+            {
+              "id": "bdaf39e4-c030-4827-81fc-c8c9e962654b",
+              "name": "The signature request to the given signer was cancelled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "key": "note",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3f198ded-a2e6-4533-82c8-9bd5f8d72483",
+              "name": "Check that:\n1. The `email` parameter was provided.\n2. The file provided has been prepared and can be read.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "key": "note",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4d9b33bc-9561-4204-afe1-a9556b3bf3e2",
+              "name": "You are not authorized to carry out the operation. Check that your API key is correct.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "key": "note",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "71be1ab9-4ca6-4a4a-b99e-90187251ef44",
+              "name": "You cannot cancel the request at this time. It could be because the signer has signed already.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "key": "note",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "89843ae7-8580-4364-a8fc-6e98a787140a",
+              "name": "Either the file provided or the signer email was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "email",
+                      "value": "<email>"
+                    },
+                    {
+                      "key": "note",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b935f5b2-5b8d-457a-b088-b3474f114705",
+          "name": "Cancel signature requests for file",
+          "request": {
+            "name": "Cancel signature requests for file",
+            "description": {},
+            "url": {
+              "path": [
+                "request",
+                "cancel",
+                "all"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "note",
+                  "value": "<string>",
+                  "description": "A message to the signers. You can use this to explain why you cancelled the request."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/pdf"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            }
+          },
+          "response": [
+            {
+              "id": "d2c9f915-f94c-458f-a91a-ada66b5b82b3",
+              "name": "All pending signature requests for the file were cancelled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "cancel",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "note",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1afe8466-261f-4469-968c-2748238e597c",
+              "name": "Check that the file provided has been prepared and can be read.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "cancel",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "note",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fb0f8d6a-f06f-48dc-b626-de6423bba1d0",
+              "name": "You are not authorized to carry out the operation. Check that your API key is correct.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "cancel",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "note",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "229793e0-4f87-4a08-9490-ca68a3f45e2e",
+              "name": "You cannot cancel the requests at this time. It could be because a signer has signed already.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "cancel",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "note",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9d5b32e0-7c63-4938-b1ca-cef4caff7e72",
+              "name": "The file provided was not found. Check that the file was processed and that you used it in a signature request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "cancel",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "note",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1ba51898-ccc1-40be-b6c3-f203161bc17c",
+          "name": "List signature requests for file",
+          "request": {
+            "name": "List signature requests for file",
+            "description": {},
+            "url": {
+              "path": [
+                "request",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "file",
+                  "value": "<url>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "password",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "64ffa56b-012a-4761-8bf2-ea1d00eb1e65",
+              "name": "List of signature requests for the file.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<url>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "password",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"legal_weight\": \"SES\",\n  \"cancelled\": true,\n  \"signed\": true,\n  \"signer\": {\n    \"id\": 2595,\n    \"uid\": \"string\",\n    \"external_id\": \"string\",\n    \"email\": \"string\",\n    \"title\": \"string\",\n    \"name\": \"string\",\n    \"first_name\": \"string\",\n    \"middle_names\": \"string\",\n    \"last_name\": \"string\",\n    \"affiliation\": \"string\",\n    \"address\": \"string\",\n    \"postalcode\": \"string\",\n    \"location\": \"string\",\n    \"eth_address\": \"string\",\n    \"quota\": 8447,\n    \"disabled\": false,\n    \"file_suffix\": \"string\",\n    \"permissions\": [\n      \"string\",\n      \"string\"\n    ],\n    \"subscription_type\": \"string\",\n    \"encrypt_claims\": true,\n    \"verified_by\": \"string\",\n    \"features\": {},\n    \"organizations\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"subscription_type\": \"string\",\n        \"quota\": 8141\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"subscription_type\": \"string\",\n        \"quota\": 4466\n      }\n    ],\n    \"identities\": [\n      {\n        \"uid\": \"string\",\n        \"user_uid\": \"string\",\n        \"issuer\": \"string\",\n        \"status\": \"string\",\n        \"verification_url\": \"string\",\n        \"verification_id\": \"string\",\n        \"evidence_url\": \"string\",\n        \"proof\": \"string\",\n        \"name\": \"string\",\n        \"given_name\": \"string\",\n        \"family_name\": \"string\",\n        \"birthday\": \"string\",\n        \"signature_level\": \"string\",\n        \"signature_jurisdiction\": \"string\"\n      },\n      {\n        \"uid\": \"string\",\n        \"user_uid\": \"string\",\n        \"issuer\": \"string\",\n        \"status\": \"string\",\n        \"verification_url\": \"string\",\n        \"verification_id\": \"string\",\n        \"evidence_url\": \"string\",\n        \"proof\": \"string\",\n        \"name\": \"string\",\n        \"given_name\": \"string\",\n        \"family_name\": \"string\",\n        \"birthday\": \"string\",\n        \"signature_level\": \"string\",\n        \"signature_jurisdiction\": \"string\"\n      }\n    ],\n    \"theme\": {\n      \"name\": \"string\"\n    },\n    \"name_verified\": false\n  },\n  \"requester\": {\n    \"id\": 3476,\n    \"uid\": \"string\",\n    \"external_id\": \"string\",\n    \"email\": \"string\",\n    \"title\": \"string\",\n    \"name\": \"string\",\n    \"first_name\": \"string\",\n    \"middle_names\": \"string\",\n    \"last_name\": \"string\",\n    \"affiliation\": \"string\",\n    \"address\": \"string\",\n    \"postalcode\": \"string\",\n    \"location\": \"string\",\n    \"eth_address\": \"string\",\n    \"quota\": 4117,\n    \"disabled\": false,\n    \"file_suffix\": \"string\",\n    \"permissions\": [\n      \"string\",\n      \"string\"\n    ],\n    \"subscription_type\": \"string\",\n    \"encrypt_claims\": false,\n    \"verified_by\": \"string\",\n    \"features\": {},\n    \"organizations\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"subscription_type\": \"string\",\n        \"quota\": 8197\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"subscription_type\": \"string\",\n        \"quota\": 4162\n      }\n    ],\n    \"identities\": [\n      {\n        \"uid\": \"string\",\n        \"user_uid\": \"string\",\n        \"issuer\": \"string\",\n        \"status\": \"string\",\n        \"verification_url\": \"string\",\n        \"verification_id\": \"string\",\n        \"evidence_url\": \"string\",\n        \"proof\": \"string\",\n        \"name\": \"string\",\n        \"given_name\": \"string\",\n        \"family_name\": \"string\",\n        \"birthday\": \"string\",\n        \"signature_level\": \"string\",\n        \"signature_jurisdiction\": \"string\"\n      },\n      {\n        \"uid\": \"string\",\n        \"user_uid\": \"string\",\n        \"issuer\": \"string\",\n        \"status\": \"string\",\n        \"verification_url\": \"string\",\n        \"verification_id\": \"string\",\n        \"evidence_url\": \"string\",\n        \"proof\": \"string\",\n        \"name\": \"string\",\n        \"given_name\": \"string\",\n        \"family_name\": \"string\",\n        \"birthday\": \"string\",\n        \"signature_level\": \"string\",\n        \"signature_jurisdiction\": \"string\"\n      }\n    ],\n    \"theme\": {\n      \"name\": \"string\"\n    },\n    \"name_verified\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08db4b1f-56cf-4b77-90a2-2154a0a1eea2",
+              "name": "Check that the file provided has been prepared and can be read.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<url>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "password",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "56e6ad3a-dd5f-4821-8c30-bd1492bd1782",
+              "name": "You are not authorized to carry out the operation. Check that your API key is correct.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<url>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "password",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b8b12138-988b-4dae-8317-33977cb6ebd6",
+              "name": "You cannot list signature requests for this file.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<url>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "password",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "006ae77b-59ee-490c-a18d-7d3e1585f8fa",
+              "name": "The file provided was not found. Check that the file was processed and that you used it in a signature request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<url>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "password",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0cc05086-035f-4fa3-9d53-948194bc2791",
+          "name": "Show status of signature request",
+          "request": {
+            "name": "Show status of signature request",
+            "description": {},
+            "url": {
+              "path": [
+                "request",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "request_url",
+                  "value": "<url>",
+                  "description": "(Required) The URL of the signature request to check."
+                },
+                {
+                  "disabled": false,
+                  "key": "password",
+                  "value": "<string>",
+                  "description": "Password for password encrypted requests"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bcc9dfbe-519f-486d-aa29-bc1627286bb1",
+              "name": "Status of the signature request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "request_url",
+                      "value": "<url>"
+                    },
+                    {
+                      "key": "password",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"url\": \"string\",\n  \"id\": \"string\",\n  \"createdAt\": \"2006-04-19T01:11:34.527Z\",\n  \"cancelled\": false,\n  \"envelope_items\": {\n    \"legal_weight\": \"SES\",\n    \"jurisdiction\": \"string\",\n    \"status\": \"unsigned\",\n    \"signed_at\": \"2022-08-22T19:00:14.527Z\",\n    \"file_url\": \"string\",\n    \"file_id\": \"string\"\n  },\n  \"signer\": {\n    \"email\": \"ONkPwB-srG@TIgmzmzRq.zsd\"\n  },\n  \"used_identification_at\": \"1948-10-05T12:04:36.980Z\",\n  \"identification_method\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7450f64d-09db-4c07-a04d-39e14db78feb",
+              "name": "Check that the file provided has been prepared and can be read.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "request_url",
+                      "value": "<url>"
+                    },
+                    {
+                      "key": "password",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "20f9e905-5f48-44ed-a795-94072d7e907e",
+              "name": "You are not authorized to carry out the operation. Check that your API key is correct.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "request_url",
+                      "value": "<url>"
+                    },
+                    {
+                      "key": "password",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fb350a69-ec51-4b7f-8c5d-c817bec337e4",
+              "name": "You cannot list signature requests for this file.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "request_url",
+                      "value": "<url>"
+                    },
+                    {
+                      "key": "password",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "765952c7-dc05-4c38-9b4e-cb5ef296153c",
+              "name": "The file provided was not found. Check that the file was processed and that you used it in a signature request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "request_url",
+                      "value": "<url>"
+                    },
+                    {
+                      "key": "password",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a120faa5-f70a-4fe1-a2ba-4333a9f1a403",
+          "name": "Show status of signature requests of given file",
+          "request": {
+            "name": "Show status of signature requests of given file",
+            "description": {},
+            "url": {
+              "path": [
+                "request",
+                "file",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "file_url",
+                  "value": "<url>",
+                  "description": "(Required) The DA URL of the file to check."
+                },
+                {
+                  "disabled": false,
+                  "key": "password",
+                  "value": "<string>",
+                  "description": "Password for password encrypted document."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5dc6d57d-ae68-4ca8-9f8c-5b3dd8ec6615",
+              "name": "File status across all signature requests.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "file",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "file_url",
+                      "value": "<url>"
+                    },
+                    {
+                      "key": "password",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"file_url\": \"string\",\n  \"file_id\": \"string\",\n  \"signature_requests\": [\n    {\n      \"id\": \"string\",\n      \"createdAt\": \"2005-11-15T08:51:40.420Z\",\n      \"cancelled\": false,\n      \"envelope_items\": {\n        \"legal_weight\": \"AES\",\n        \"jurisdiction\": \"string\",\n        \"status\": \"cancelled\",\n        \"signed_at\": \"1958-01-10T18:21:00.397Z\",\n        \"file_url\": \"string\",\n        \"file_id\": \"string\"\n      },\n      \"signer\": {\n        \"email\": \"8zgFMa6@Sz.fuw\"\n      },\n      \"used_identification_at\": \"1981-02-19T16:09:30.503Z\",\n      \"identification_method\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"createdAt\": \"2023-02-21T20:20:38.307Z\",\n      \"cancelled\": false,\n      \"envelope_items\": {\n        \"legal_weight\": \"SES\",\n        \"jurisdiction\": \"string\",\n        \"status\": \"cancelled\",\n        \"signed_at\": \"2015-12-07T19:11:06.598Z\",\n        \"file_url\": \"string\",\n        \"file_id\": \"string\"\n      },\n      \"signer\": {\n        \"email\": \"LLXox1R-wczc5S@M.ae\"\n      },\n      \"used_identification_at\": \"2017-08-21T18:21:14.688Z\",\n      \"identification_method\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e3502d48-c411-4630-a1a2-f3e51419e44b",
+              "name": "Check that the file provided has been prepared and can be read.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "file",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "file_url",
+                      "value": "<url>"
+                    },
+                    {
+                      "key": "password",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c817fed2-b60a-4590-b1f9-7e57aff5d779",
+              "name": "You are not authorized to carry out the operation. Check that your API key is correct.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "file",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "file_url",
+                      "value": "<url>"
+                    },
+                    {
+                      "key": "password",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f4cd2415-e7b7-4802-8967-88201a76bb0d",
+              "name": "You cannot list signature requests for this file.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "file",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "file_url",
+                      "value": "<url>"
+                    },
+                    {
+                      "key": "password",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3aa9918f-4404-4f31-bd8e-4731d55743b1",
+              "name": "The file provided was not found. Check that the file was processed and that you used it in a signature request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request",
+                    "file",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "file_url",
+                      "value": "<url>"
+                    },
+                    {
+                      "key": "password",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aab68828-113d-497f-b3d3-7e1661ae1971",
+          "name": "Check account QES status",
+          "request": {
+            "name": "Check account QES status",
+            "description": {},
+            "url": {
+              "path": [
+                "qes",
+                "check"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jurisdiction\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "07106ef7-9431-48c2-ac61-af78f1f4e5dc",
+              "name": "QES is enabled for your account.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "qes",
+                    "check"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jurisdiction\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d2303e5f-c2dd-4fff-8f88-bcac83e302dc",
+              "name": "The request is not properly formed. For example, the content could not be read.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "qes",
+                    "check"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jurisdiction\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "774b2d01-d5b2-479c-9f71-d24631d9d295",
+              "name": "You are not authorized to carry out the operation. Check that your API key is correct.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "qes",
+                    "check"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jurisdiction\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bff8062c-60f0-411a-89ff-4009345a63b3",
+              "name": "QES is disabled for your account.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "qes",
+                    "check"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"jurisdiction\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "{{ .APIServerURL }}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f3b6f3c4-1be9-45ef-bf66-6fdfcb5e6bd8",
+    "name": "{{ .ProductName }} Admin Account Signing API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "{{ .ProductName }} Admin API is used to manage users, roles and teamspaces.\n\n## Setup requirements\n\nAuthentication is required to perform some operations. Please refer to the [Authentication](https://developers.certifaction.com/en/references/authentication) section to obtain an API Key or token.\n",
+      "type": "text/plain"
+    }
+  }
+}

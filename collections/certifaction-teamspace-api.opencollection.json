@@ -1,0 +1,103 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "{{ .ProductName }} Admin Account Teamspace API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Teamspace",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Rename a teamspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{ .APIServerURL }}/team-space/:id/rename",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the teamspace to rename"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the name of a teamspace."
+        },
+        {
+          "info": {
+            "name": "Add members to a teamspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{ .APIServerURL }}/team-space/:id/members",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the teamspace"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add one or more users to a teamspace by user ID or email."
+        },
+        {
+          "info": {
+            "name": "Remove a member from a teamspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{ .APIServerURL }}/team-space/:id/members/:memberId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the teamspace"
+              },
+              {
+                "name": "memberId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the member to remove"
+              },
+              {
+                "name": "send_email",
+                "value": "",
+                "type": "query",
+                "description": "Whether to send a notification email. Default is true."
+              }
+            ]
+          },
+          "docs": "Remove a specific user from a teamspace."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

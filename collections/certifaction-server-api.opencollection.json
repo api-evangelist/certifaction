@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "{{ .ProductName }} Admin Account Server API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Server",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Check server health",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{ .APIServerURL }}/health"
+          },
+          "docs": "Check server health"
+        },
+        {
+          "info": {
+            "name": "Check that the API server is running",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{ .APIServerURL }}/ping"
+          },
+          "docs": "Check that the API server is running"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
