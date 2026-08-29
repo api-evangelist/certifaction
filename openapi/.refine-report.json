@@ -1,31 +1,34 @@
 {
   "provider": "certifaction",
   "sources": [
-    "certifaction-account-api-openapi.yml",
-    "certifaction-documents-api-openapi.yml",
-    "certifaction-organization-api-openapi.yml",
-    "certifaction-server-api-openapi.yml",
-    "certifaction-signing-api-openapi.yml",
-    "certifaction-teamspace-api-openapi.yml"
+    "_original/certifaction-admin-api-openapi.yml",
+    "_original/certifaction-local-api-openapi.yml"
   ],
   "outputs": [
+    "certifaction-organization-api-openapi.yml",
+    "certifaction-teamspace-api-openapi.yml",
     "certifaction-account-api-openapi.yml",
     "certifaction-documents-api-openapi.yml",
-    "certifaction-organization-api-openapi.yml",
     "certifaction-server-api-openapi.yml",
-    "certifaction-signing-api-openapi.yml",
-    "certifaction-teamspace-api-openapi.yml"
+    "certifaction-signing-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [
-    "certifaction-account-api-openapi.yml: info.version missing",
-    "certifaction-documents-api-openapi.yml: info.version missing",
-    "certifaction-organization-api-openapi.yml: info.version missing",
-    "certifaction-server-api-openapi.yml: info.version missing",
-    "certifaction-signing-api-openapi.yml: info.version missing",
-    "certifaction-teamspace-api-openapi.yml: info.version missing"
+    "certifaction-admin-api-openapi.yml: info.version missing",
+    "certifaction-local-api-openapi.yml: info.version missing"
   ],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "certifaction-admin-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "certifaction-local-api-openapi.yml: upgraded openapi 3.0.2 -> OpenAPI 3.2.0"
+  ],
+  "skipped": [
+    "certifaction-account-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "certifaction-documents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "certifaction-organization-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "certifaction-server-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "certifaction-signing-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "certifaction-teamspace-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

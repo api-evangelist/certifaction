@@ -1,18 +1,26 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: '{{ .ProductName }} Admin Account Server API'
-  description: '{{ .ProductName }} Admin API is used to manage users, roles and teamspaces.
+  title: '{{ .ProductName }} Local Server API'
+  description: 'A proxy server for integrating with the {{ .ProductName }} platform.
 
 
     ## Setup requirements
 
 
-    Authentication is required to perform some operations. Please refer to the [Authentication](https://developers.certifaction.com/en/references/authentication) section to obtain an API Key or token.
+    1. Authentication is required to perform some operations. Please refer to the [Authentication](https://developers.certifaction.com/en/references/authentication) section to obtain an API Key or token.
+
+    2. Start the local server on the CLI using the command `{{ .CommandName }} server`
+
+
+    Refer to [our setup guide](https://developers.certifaction.com/en/guides/getting-started-api) to get started.
 
     '
-  version: "1.0"
+  version: ''
 servers:
-- url: '{{ .APIServerURL }}'
+- url: http://localhost:{port}
+  variables:
+    port:
+      default: '8081'
 security:
 - api_key: []
 tags:

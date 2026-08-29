@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: '{{ .ProductName }} Admin Account Teamspace API'
+  title: '{{ .ProductName }} Admin Teamspace API'
   description: '{{ .ProductName }} Admin API is used to manage users, roles and teamspaces.
 
 
@@ -10,7 +10,7 @@ info:
     Authentication is required to perform some operations. Please refer to the [Authentication](https://developers.certifaction.com/en/references/authentication) section to obtain an API Key or token.
 
     '
-  version: "1.0"
+  version: ''
 servers:
 - url: '{{ .APIServerURL }}'
 security:
@@ -124,16 +124,16 @@ paths:
           $ref: '#/components/responses/internal_server_error'
 components:
   responses:
-    bad_request:
-      description: The request is not properly formed. For example, the content could not be read.
     internal_server_error:
       description: An error occurred on the server
     not_found:
       description: The requested resource was not found.
-    forbidden:
-      description: You do not have permission to carry out the operation. For example you might not have the required role.
     unauthorized:
       description: You are not authorized to carry out the operation. Check that your API key is correct.
+    forbidden:
+      description: You do not have permission to carry out the operation. For example you might not have the required role.
+    bad_request:
+      description: The request is not properly formed. For example, the content could not be read.
   schemas:
     teamspace_member_add_request:
       type: object
