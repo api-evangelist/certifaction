@@ -94,6 +94,8 @@ apis:
   humanURL: https://developers.certifaction.com/en/references/api
   baseURL: https://api.certifaction.io
   tags:
+  - Servers
+  tags_raw:
   - Server
   properties:
   - type: OpenAPI
