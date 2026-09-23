@@ -7,9 +7,7 @@ info:
     ## Setup requirements
 
 
-    Authentication is required to perform some operations. Please refer to the [Authentication](https://developers.certifaction.com/en/references/authentication) section to obtain an API Key or token.
-
-    '
+    Authentication is required to perform some operations. Please refer to the Authentication section to obtain an API Key or token.'
   version: ''
 servers:
 - url: '{{ .APIServerURL }}'
@@ -51,6 +49,8 @@ paths:
           $ref: '#/components/responses/not_found'
         '500':
           $ref: '#/components/responses/internal_server_error'
+      operationId: patchTeamSpaceByIdRename
+      x-operation-id-source: derived
   /team-space/{id}/members:
     post:
       tags:
@@ -83,6 +83,8 @@ paths:
           $ref: '#/components/responses/not_found'
         '500':
           $ref: '#/components/responses/internal_server_error'
+      operationId: postTeamSpaceByIdMembers
+      x-operation-id-source: derived
   /team-space/{id}/members/{memberId}:
     delete:
       tags:
@@ -122,19 +124,29 @@ paths:
           $ref: '#/components/responses/not_found'
         '500':
           $ref: '#/components/responses/internal_server_error'
+      operationId: deleteTeamSpaceByIdMembersByMemberId
+      x-operation-id-source: derived
 components:
   responses:
     internal_server_error:
       description: An error occurred on the server
-    not_found:
-      description: The requested resource was not found.
     unauthorized:
       description: You are not authorized to carry out the operation. Check that your API key is correct.
-    forbidden:
-      description: You do not have permission to carry out the operation. For example you might not have the required role.
+    not_found:
+      description: The requested resource was not found.
     bad_request:
       description: The request is not properly formed. For example, the content could not be read.
+    forbidden:
+      description: You do not have permission to carry out the operation. For example you might not have the required role.
   schemas:
+    teamspace_rename_request:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The new name for the teamspace
+      required:
+      - name
     teamspace_member_add_request:
       type: object
       properties:
@@ -159,14 +171,6 @@ components:
         - properties:
             member_user_emails:
               maxItems: 0
-    teamspace_rename_request:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The new name for the teamspace
-      required:
-      - name
   securitySchemes:
     api_key:
       name: Authorization

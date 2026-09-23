@@ -7,9 +7,7 @@ info:
     ## Setup requirements
 
 
-    Authentication is required to perform some operations. Please refer to the [Authentication](https://developers.certifaction.com/en/references/authentication) section to obtain an API Key or token.
-
-    '
+    Authentication is required to perform some operations. Please refer to the Authentication section to obtain an API Key or token.'
   version: ''
 servers:
 - url: '{{ .APIServerURL }}'
@@ -64,6 +62,8 @@ paths:
           $ref: '#/components/responses/conflict'
         '500':
           $ref: '#/components/responses/internal_server_error'
+      operationId: postOrganizationByIdUser
+      x-operation-id-source: derived
     delete:
       tags:
       - Organization
@@ -109,6 +109,8 @@ paths:
           $ref: '#/components/responses/conflict'
         '500':
           $ref: '#/components/responses/internal_server_error'
+      operationId: deleteOrganizationByIdUser
+      x-operation-id-source: derived
   /organization/{organization_id}/role:
     post:
       tags:
@@ -137,48 +139,17 @@ paths:
           $ref: '#/components/responses/conflict'
         '500':
           $ref: '#/components/responses/internal_server_error'
+      operationId: postOrganizationByOrganizationIdRole
+      x-operation-id-source: derived
 components:
-  responses:
-    internal_server_error:
-      description: An error occurred on the server
-    not_found:
-      description: The requested resource was not found.
-    unauthorized:
-      description: You are not authorized to carry out the operation. Check that your API key is correct.
-    forbidden:
-      description: You do not have permission to carry out the operation. For example you might not have the required role.
-    conflict:
-      description: Conflict detected in the request. For example, a user might have already been joined an organization.
-    bad_request:
-      description: The request is not properly formed. For example, the content could not be read.
-  requestBodies:
-    organization_user_invite:
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              email:
-                type: string
-              role_id:
-                type: string
-              send_email:
-                type: boolean
-                description: Whether to send an email invitation. Default is true if not specified.
-    organization_role_assign:
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              user_uid:
-                type: string
-                description: Either user_uid OR invite_email have to be set, depending if the user already joined or not
-              invite_email:
-                type: string
-              role_id:
-                type: string
   schemas:
+    team_space_description:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
     organization_user:
       type: object
       properties:
@@ -206,17 +177,6 @@ components:
           items:
             $ref: '#/components/schemas/team_space_description'
           nullable: true
-    organization_role:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        default:
-          type: boolean
-        admin:
-          type: boolean
     organization:
       type: object
       properties:
@@ -273,13 +233,57 @@ components:
           - name
         name_verified:
           type: boolean
-    team_space_description:
+    organization_role:
       type: object
       properties:
         id:
           type: string
         name:
           type: string
+        default:
+          type: boolean
+        admin:
+          type: boolean
+  requestBodies:
+    organization_user_invite:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              role_id:
+                type: string
+              send_email:
+                type: boolean
+                description: Whether to send an email invitation. Default is true if not specified.
+    organization_role_assign:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              user_uid:
+                type: string
+                description: Either user_uid OR invite_email have to be set, depending if the user already joined or not
+              invite_email:
+                type: string
+              role_id:
+                type: string
+  responses:
+    conflict:
+      description: Conflict detected in the request. For example, a user might have already been joined an organization.
+    internal_server_error:
+      description: An error occurred on the server
+    forbidden:
+      description: You do not have permission to carry out the operation. For example you might not have the required role.
+    unauthorized:
+      description: You are not authorized to carry out the operation. Check that your API key is correct.
+    not_found:
+      description: The requested resource was not found.
+    bad_request:
+      description: The request is not properly formed. For example, the content could not be read.
   securitySchemes:
     api_key:
       name: Authorization

@@ -7,14 +7,12 @@ info:
     ## Setup requirements
 
 
-    1. Authentication is required to perform some operations. Please refer to the [Authentication](https://developers.certifaction.com/en/references/authentication) section to obtain an API Key or token.
+    1. Authentication is required to perform some operations. Please refer to the Authentication section to obtain an API Key or token.
 
     2. Start the local server on the CLI using the command `{{ .CommandName }} server`
 
 
-    Refer to [our setup guide](https://developers.certifaction.com/en/guides/getting-started-api) to get started.
-
-    '
+    Refer to our setup guide to get started.'
   version: ''
 servers:
 - url: http://localhost:{port}
