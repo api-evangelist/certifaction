@@ -115,6 +115,20 @@ components:
       - given_name
       - family_name
       - birthday
+    organization:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          maxLength: 80
+          minLength: 2
+        subscription_type:
+          type: string
+        quota:
+          type: integer
+      required:
+      - id
     user:
       properties:
         id:
@@ -179,20 +193,6 @@ components:
           - name
         name_verified:
           type: boolean
-    organization:
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-          maxLength: 80
-          minLength: 2
-        subscription_type:
-          type: string
-        quota:
-          type: integer
-      required:
-      - id
   securitySchemes:
     api_key:
       name: Authorization
