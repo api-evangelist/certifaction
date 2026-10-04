@@ -79,10 +79,10 @@ paths:
       - Documents
 components:
   responses:
-    unauthorized:
-      description: You are not authorized to carry out the operation. Check that your API key is correct.
     bad_request:
       description: The request is not properly formed. For example, the content could not be read.
+    unauthorized:
+      description: You are not authorized to carry out the operation. Check that your API key is correct.
   securitySchemes:
     api_key:
       name: Authorization
