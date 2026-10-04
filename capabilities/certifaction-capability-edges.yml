@@ -1,0 +1,26 @@
+slug: certifaction
+provider: Certifaction
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Organization
+  spec_file: certifaction-organization-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.7
+  evidence: Admin API is used to manage users, roles and teamspaces; POST /organization/{id}/user postOrganizationByIdUser
+    Invite user; DELETE ... Remove a user from an organization; POST .../role Change the role of a user
+  reason: Operations invite users, remove users and change their roles within an organization — user account
+    lifecycle and role assignment, i.e. identity and access administration. Could alternatively be read
+    as tenant user lifecycle, hence 0.7 rather than higher.
