@@ -1,22 +1,40 @@
-generated: '2026-07-18'
+generated: '2026-09-23'
 method: generated
-source: openapi/certifaction-admin-api-openapi.yml, openapi/certifaction-local-api-openapi.yml
+source: openapi/certifaction-account-api-openapi.yml, openapi/certifaction-documents-api-openapi.yml,
+  openapi/certifaction-organization-api-openapi.yml, openapi/certifaction-server-api-openapi.yml,
+  openapi/certifaction-signing-api-openapi.yml, openapi/certifaction-teamspace-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
-  operations: 21
+  operations: 22
   by_action_class:
-    connected: 7
     acting: 14
+    connected: 8
   by_consequence:
-    read: 7
     write: 14
+    read: 8
   human_in_the_loop_required: 0
 operations:
-- path: /organization
+- path: /qes/check
+  method: post
+  operationId: postQesCheck
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /user
   method: get
-  operationId: getOrganization
+  operationId: get_user
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -24,96 +42,6 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /organization/{id}/user
-  method: post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /organization/{id}/user
-  method: delete
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /organization/{organization_id}/role
-  method: post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /team-space/{id}/rename
-  method: patch
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /team-space/{id}/members
-  method: post
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /team-space/{id}/members/{memberId}
-  method: delete
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /delete-access
   method: post
   operationId: remove_access
@@ -140,6 +68,64 @@ operations:
     token:
       max-ttl: 3600
     audit: none
+- path: /organization
+  method: get
+  operationId: getOrganization
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /organization/{id}/user
+  method: post
+  operationId: postOrganizationByIdUser
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /organization/{id}/user
+  method: delete
+  operationId: deleteOrganizationByIdUser
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /organization/{organization_id}/role
+  method: post
+  operationId: postOrganizationByOrganizationIdRole
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /health
   method: get
   operationId: server_health_check
@@ -152,6 +138,7 @@ operations:
     audit: none
 - path: /ping
   method: get
+  operationId: getPing
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -243,18 +230,12 @@ operations:
   method: post
   operationId: list_requests
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /request/status
   method: get
   operationId: request_status
@@ -277,6 +258,7 @@ operations:
     audit: none
 - path: /qes/check
   method: post
+  operationId: postQesCheck
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -290,13 +272,51 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /user
-  method: get
-  operationId: get_user
+- path: /team-space/{id}/rename
+  method: patch
+  operationId: patchTeamSpaceByIdRename
   x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
     token:
-      max-ttl: 3600
-    audit: none
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /team-space/{id}/members
+  method: post
+  operationId: postTeamSpaceByIdMembers
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /team-space/{id}/members/{memberId}
+  method: delete
+  operationId: deleteTeamSpaceByIdMembersByMemberId
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
