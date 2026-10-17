@@ -66,11 +66,6 @@ paths:
       tags:
       - Account
 components:
-  responses:
-    unauthorized:
-      description: You are not authorized to carry out the operation. Check that your API key is correct.
-    bad_request:
-      description: The request is not properly formed. For example, the content could not be read.
   schemas:
     user:
       properties:
@@ -193,6 +188,11 @@ components:
       - given_name
       - family_name
       - birthday
+  responses:
+    unauthorized:
+      description: You are not authorized to carry out the operation. Check that your API key is correct.
+    bad_request:
+      description: The request is not properly formed. For example, the content could not be read.
   securitySchemes:
     api_key:
       name: Authorization
