@@ -1,0 +1,76 @@
+edges:
+- partner_name: npm registry
+  partner: npm
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (JavaScript/TypeScript)
+  evidence: https://www.npmjs.com/package/@certifaction/pdfjs
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: npm registry (public registry JSON)
+    spec_file: null
+    language: JavaScript/TypeScript
+    packages:
+    - name: '@certifaction/pdfjs'
+      version: 1.7.2
+      released: '2023-11-09'
+      released_field: modified
+      lapsed: true
+      page: https://www.npmjs.com/package/@certifaction/pdfjs
+      repo_leg: domain:certifaction.com
+      publisher_leg: org:certifaction
+      matched_by: domain
+    - name: '@certifaction/verification-core'
+      version: 3.7.1
+      released: '2023-03-10'
+      released_field: modified
+      lapsed: true
+      page: https://www.npmjs.com/package/@certifaction/verification-core
+      repo_leg: domain:certifaction.com
+      publisher_leg: org:certifaction
+      matched_by: domain
+    - name: '@certifaction/verification-vue-component'
+      version: 3.7.1
+      released: '2023-03-10'
+      released_field: modified
+      lapsed: true
+      page: https://www.npmjs.com/package/@certifaction/verification-vue-component
+      repo_leg: domain:certifaction.com
+      publisher_leg: org:certifaction
+      matched_by: domain
+    - name: '@certifaction/vue-pdf-viewer'
+      version: 1.7.2
+      released: '2023-11-09'
+      released_field: modified
+      lapsed: true
+      page: https://www.npmjs.com/package/@certifaction/vue-pdf-viewer
+      repo_leg: domain:certifaction.com
+      publisher_leg: org:certifaction
+      matched_by: domain
+    current: false
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
+  first_seen: '2026-10-18'
+generated: '2026-10-18'
+method: searched
+source:
+- https://api.nuget.org/v3
+- https://crates.io/api/v1
+- https://proxy.golang.org
+- https://pypi.org/pypi
+- https://registry.npmjs.org
+- https://repo1.maven.org/maven2
+- https://rubygems.org/api/v1
+checked:
+- https://api.nuget.org/v3
+- https://crates.io/api/v1
+- https://proxy.golang.org
+- https://pypi.org/pypi
+- https://registry.npmjs.org
+- https://repo1.maven.org/maven2
+- https://rubygems.org/api/v1
