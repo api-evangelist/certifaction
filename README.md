@@ -64,6 +64,138 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Certifaction is a company surfaced as a portfolio company of hv-capital, seedcamp and added to the API Evangelist network as a stub for enrichment. Sector: ai-enterprise-software. This profile is a lead awaiting the enrichment pipeline.
+Certifaction is a privacy-first digital signature platform built around a Zero Document Knowledge model: documents are hashed and end-to-end encrypted on the client so they can be signed and verified without Certifaction ever seeing their content. It offers Simple, Advanced, and Qualified Electronic Signatures (SES/AES/QES) compliant with eIDAS, ZertES, UETA and ESIGN, delivered through a client-hosted CLI and Local API plus an Admin API for organization, user, role and team-space management, with EU / Switzerland / on-premises data residency and ISO/IEC 27001:2022 certification.
 
-Backed by: hv-capital, seedcamp — http://certifaction.com
+**Areas:** Company · Ai Enterprise Software · E-Signature · Digital Signature · Qualified Electronic Signature · eIDAS · Privacy · Compliance · Identity Verification · Switzerland
+
+## Certifaction on APIs.io
+
+Everything profiled for Certifaction is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/certifaction/](https://apis.io/providers/certifaction/)** — or go straight to one of the APIs or properties below.
+
+### APIs (6)
+
+- [Certifaction Account API](https://apis.io/apis/certifaction/certifaction-account-api/) — Access your user account data
+- [Certifaction Documents API](https://apis.io/apis/certifaction/certifaction-documents-api/) — Download your documents or remove {{ .ProductName }}'s access to them
+- [Certifaction Organization API](https://apis.io/apis/certifaction/certifaction-organization-api/) — Manage your organization, users, and roles.
+- [Certifaction Server API](https://apis.io/apis/certifaction/certifaction-server-api/) — Check the server's status
+- [Certifaction Signing API](https://apis.io/apis/certifaction/certifaction-signing-api/) — Sign files and request signatures
+- [Certifaction Teamspace API](https://apis.io/apis/certifaction/certifaction-teamspace-api/) — Manage teamspaces and their members.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Certifaction Webhooks](https://apis.io/asyncapis/certifaction/certifaction-webhooks/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [certifaction](https://apis.io/servers/certifaction/certifaction/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Certifaction Agentic Access](https://apis.io/agentic-access/certifaction/certifaction-agentic-access/)
+
+#### Collections (6)
+
+Postman and Open Collection request collections.
+
+- [{{ .ProductName }} Admin Account API](https://apis.io/collections/certifaction/open-certifaction-account-api/)
+- [{{ .ProductName }} Admin Account Documents API](https://apis.io/collections/certifaction/open-certifaction-documents-api/)
+- [{{ .ProductName }} Admin Account Organization API](https://apis.io/collections/certifaction/open-certifaction-organization-api/)
+- [{{ .ProductName }} Admin Account Server API](https://apis.io/collections/certifaction/open-certifaction-server-api/)
+- [{{ .ProductName }} Admin Account Signing API](https://apis.io/collections/certifaction/open-certifaction-signing-api/)
+- [{{ .ProductName }} Admin Account Teamspace API](https://apis.io/collections/certifaction/open-certifaction-teamspace-api/)
+
+#### Overlays (2)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Certifaction Admin Api Overlay](https://apis.io/overlays/certifaction/certifaction-admin-api-overlay/)
+- [Certifaction Local Api Overlay](https://apis.io/overlays/certifaction/certifaction-local-api-overlay/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Certifaction Authentication](https://apis.io/security/certifaction/certifaction-authentication/)
+- [Certifaction Domain Security](https://apis.io/security/certifaction/certifaction-domain-security/)
+- [Certifaction Trust Center](https://apis.io/security/certifaction/certifaction-trust-center/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://certifaction.com)
+- [Documentation](https://developers.certifaction.com/en/guides/about)
+- [Getting started](https://developers.certifaction.com/en/guides/getting-started-api)
+- [API reference](https://developers.certifaction.com/en/references/api)
+- [Pricing](https://certifaction.com/pricing/)
+- [Sign up](https://app.certifaction.io/signup/)
+- [Blog](https://certifaction.com/content-hub/)
+- [Compliance](https://certifaction.com/security-esigning-and-data/)
+- [Terms of service](https://certifaction.com/terms-and-conditions/)
+- [Privacy policy](https://certifaction.com/privacy-policy/)
+- [GitHub](https://github.com/certifaction)
+
+## API Evangelist rating
+
+**Kin Score 51.6** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 51.1 |
+| Contract governance | 18.2 |
+| Operational transparency | 26.3 |
+| Developer ergonomics | 68.5 |
+| Access clarity | 53.9 |
+
+**Agent readiness 26.5** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 29.4** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/certifaction/](https://apis.io/providers/certifaction/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Certifaction: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/certifaction/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
